@@ -127,6 +127,7 @@ public class InterfazJuego extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Turno del Jugador 2");
                     boton.setEnabled(false);
+                    Toolkit.getDefaultToolkit().beep();
                     boton.setBackground(Color.BLUE);
                 }
                 // Alternar el turno
