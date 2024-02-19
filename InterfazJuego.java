@@ -1,15 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
 
 public class InterfazJuego extends JFrame {
     JButton jbPause, jbSalirJogo;
     JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas;
     JTextField jtComputadorGanadas, jtJugadorGanadas;
-    JComboBox jcIzquierda,jcDerecha;
-    String personasIzquierda[] = {"Computador","Persona"};
-    String personasDerecha[]={"Computador","Persona"};
+    JComboBox<String> jcIzquierda, jcDerecha;
+    String personasIzquierda[] = {"Computador", "Persona"};
+    String personasDerecha[] = {"Computador", "Persona"};
     private int tamanoBoton = 60;
     private int espacioEntreBotones = 5;
     private boolean turnoJugador1 = true; // Indica si es el turno del jugador 1
@@ -76,15 +75,47 @@ public class InterfazJuego extends JFrame {
         add(jtComputadorGanadas);
         jtComputadorGanadas.setEditable(false);
         // jcombo de la izquierda 
-        jcIzquierda = new JComboBox(personasIzquierda);
+        jcIzquierda = new JComboBox<>(personasIzquierda);
         jcIzquierda.setBounds(30, 195, 140, 30);
         jcIzquierda.setMaximumRowCount(2);
         add(jcIzquierda);
+        // Agregar ActionListener al JComboBox de la izquierda
+        jcIzquierda.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la opción seleccionada
+                String seleccion = (String) jcIzquierda.getSelectedItem();
+
+                // Hacer algo basado en la opción seleccionada
+                if (seleccion.equals("Computador")) {
+                    // Acción cuando se selecciona "Computador"
+                    JOptionPane.showMessageDialog(null, "Se seleccionó Computador en la izquierda");
+                } else if (seleccion.equals("Persona")) {
+                    // Acción cuando se selecciona "Persona"
+                    JOptionPane.showMessageDialog(null, "Se seleccionó Persona en la izquierda");
+                }
+            }
+        });
         // jcombo de la derecha
-        jcDerecha= new JComboBox(personasDerecha);
-        jcDerecha.setBounds(800,195,140,30);
-        jcIzquierda.setMaximumRowCount(2);
+        jcDerecha = new JComboBox<>(personasDerecha);
+        jcDerecha.setBounds(800, 195, 140, 30);
+        jcDerecha.setMaximumRowCount(2);
         add(jcDerecha);
+        // Agregar ActionListener al JComboBox de la derecha
+        jcDerecha.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la opción seleccionada
+                String seleccion = (String) jcDerecha.getSelectedItem();
+
+                // Hacer algo basado en la opción seleccionada
+                if (seleccion.equals("Computador")) {
+                    // Acción cuando se selecciona "Computador"
+                    JOptionPane.showMessageDialog(null, "Se seleccionó Computador en la derecha");
+                } else if (seleccion.equals("Persona")) {
+                    // Acción cuando se selecciona "Persona"
+                    JOptionPane.showMessageDialog(null, "Se seleccionó Persona en la derecha");
+                }
+            }
+        });
 
         setVisible(true);
 
@@ -112,7 +143,7 @@ public class InterfazJuego extends JFrame {
             }
 
             if (e.getActionCommand().equals("Salir del juego")) {
-                JOptionPane.showMessageDialog(null,"ciao");
+                JOptionPane.showMessageDialog(null, "ciao");
                 System.exit(0);
             }
 
