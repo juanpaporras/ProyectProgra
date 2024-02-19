@@ -1,42 +1,41 @@
+//Proyecto grupal
+
 public class Ficha {
 
-	//atributos
+	//Atributos
 	private String color;
 	private String nombre;
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	// metodo constructor
+	//---------------------------------------------------------------------------------------------------
+	
+	//Metodo Constructor
 	public Ficha(String color, String nombre){
-	
-	setColor(color);
-	setNombre(nombre);
-	
-	}// fin del constructor
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-	// metodo get y set de color
-	public String getColorFicha(){
-	
-		return color;
-	
+		setColorFicha(color);
+		setNombre(nombre);
 	}
+	//---------------------------------------------------------------------------------------------------
 	
-	public void setColor(String color){
-	
+	//Metodos Setters
+	//Set Color Ficha
+	public void setColorFicha(String color){
 		this.color=color;
-	
-	}
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-	// metodo get y set de nombre
-	public String getNombre(){
-	
-		return nombre;
-	
 	}
 	
+	//Set Nombre
 	public void setNombre(String nombre){
-	
 		this.nombre=nombre;
-	
 	}
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+	//---------------------------------------------------------------------------------------------------
+	
+	//Metodos Getters
+	//Get Color Ficha
+	public String getColorFicha(){
+		return color;
+	}
+	
+	//Get Nombre
+	public String getNombre(){
+		return nombre;
+	}
+	//---------------------------------------------------------------------------------------------------
 
 }// fin de la clase 

@@ -1,10 +1,12 @@
 //Proyecto Grupal
 
 public class Tablero{
+	
 	//Atributos 
 	private boolean realizado;
 	private int posicion, igualAzul, igualRojo;
 	private String colorGanador;
+	//---------------------------------------------------------------------------------------------------
 	
 	//Referencias
 	private Ficha ficha;
@@ -34,16 +36,16 @@ public class Tablero{
 	//---------------------------------------------------------------------------------------------------
 	
 	//Realizar movimiento
-	public int realizarMovimiento (int columna/*recibe un objeto(jugada) como parametro*/){
+	public int realizarMovimiento (int columna, Ficha jugada){
 		
-		
+		//Fila 0 para verificar si la columna esta llena
 		if (tablero[0][columna]!=null){
 			posicion= -1;			
 		} else {
 			for (int fila=1; fila<tablero.length; fila++){
 				if (tablero[fila][columna]!=null){
-					//tablero[(fila-1)][columna]=jugada;
-					posicion=fila;
+					tablero[(fila-1)][columna]=jugada;
+					posicion=(fila-1);
 				} 
 			}
 		}
