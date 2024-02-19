@@ -112,7 +112,7 @@ public class InterfazJuego extends JFrame {
             }
 
             if (e.getActionCommand().equals("Salir del juego")) {
-                JOptionPane.showMessageDialog(null,"me cago en todo");
+                JOptionPane.showMessageDialog(null,"ciao");
                 System.exit(0);
             }
 
