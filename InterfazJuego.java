@@ -13,7 +13,7 @@ public class InterfazJuego extends JFrame {
     private JTextField jtComputadorGanadas, jtJugadorGanadas, jtNombreJugador, jtTotalPartidas;
     private JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas, jlNombreJugador;
     private JLabel jlTotalPartidas;
-    //---------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------- 
     
     //Atributos
     private String personasIzquierda[] = {"Computador","Persona"};
