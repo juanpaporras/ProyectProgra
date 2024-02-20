@@ -1,5 +1,3 @@
-//Proyecto Grupal
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,9 +7,9 @@ public class InterfazJuego extends JFrame {
     
     //Atributos Swing
     private JButton jbPause, jbSalirJogo, jbGuardarJugador;
-    private JComboBox jcIzquierda,jcDerecha;
+    private JComboBox<String> jcIzquierda, jcDerecha;
     private JTextField jtComputadorGanadas, jtJugadorGanadas, jtNombreJugador, jtTotalPartidas;
-    private JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas, jlNombreJugador;
+    private JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas, jlNombreJugador,jlJugador1,jlJugador2;
     private JLabel jlTotalPartidas;
     //--------------------------------------------------------------------------------------------------- 
     
@@ -50,7 +48,15 @@ public class InterfazJuego extends JFrame {
             }
         }
 		//-----------------------------------------------------------------------------------------------
-		
+        //Se crea los jlabels de los jcombo
+        jlJugador1 = new JLabel("Jugador 1");
+        jlJugador1.setBounds(45, 300, 150, 60);
+        add(jlJugador1);
+		//-----------------------------------------------------------------------------------------------
+        jlJugador2 = new JLabel("Jugador 2");
+        jlJugador2.setBounds(45, 370, 150, 60);
+        add(jlJugador2);
+        //-----------------------------------------------------------------------------------------------
 		//Se crea, posiciona y añade el boton de pausa
         jbPause = new JButton("Boton de Pausa");
         jbPause.setBounds(335, 450, 130, 30);
@@ -132,6 +138,50 @@ public class InterfazJuego extends JFrame {
         jbGuardarJugador.setBounds(795, 170, 150, 30);
         add(jbGuardarJugador);
         //-----------------------------------------------------------------------------------------------
+        
+        //Se crea el JComboBox de jugador1
+        jcDerecha= new JComboBox<>(personasDerecha);
+        jcDerecha.setBounds(30, 350, 150, 30);
+        add(jcDerecha);
+        
+        //Se agrega ActionListener al JComboBox de la derecha
+        jcDerecha.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la opción seleccionada
+                String seleccion = (String) jcDerecha.getSelectedItem();
+
+                // Hacer algo basado en la opción seleccionada
+                if (seleccion.equals("Computador")) {
+                    // Acción cuando se selecciona "Computador"
+                    JOptionPane.showMessageDialog(null, "Se seleccionó Computador en la derecha");
+                } else if (seleccion.equals("Persona")) {
+                    // Acción cuando se selecciona "Persona"
+                    JOptionPane.showMessageDialog(null, "Se seleccionó Persona en la derecha");
+                }
+            }
+        });
+        
+        //Se crea el JComboBox de jugador2
+        jcIzquierda = new JComboBox<>(personasIzquierda);
+        jcIzquierda.setBounds(30, 420, 150, 30);
+        add(jcIzquierda);
+        
+        //Se agrega ActionListener al JComboBox de la izquierda
+        jcIzquierda.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la opción seleccionada
+                String seleccion = (String) jcIzquierda.getSelectedItem();
+
+                // Hacer algo basado en la opción seleccionada
+                if (seleccion.equals("Computador")) {
+                    // Acción cuando se selecciona "Computador"
+                    JOptionPane.showMessageDialog(null, "Se seleccionó Computador en la izquierda");
+                } else if (seleccion.equals("Persona")) {
+                    // Acción cuando se selecciona "Persona"
+                    JOptionPane.showMessageDialog(null, "Se seleccionó Persona en la izquierda");
+                }
+            }
+        });
         
         //Instanciamos el Tablero
         tablero= new Tablero();
