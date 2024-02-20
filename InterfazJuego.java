@@ -8,19 +8,12 @@ import java.util.Random;
 public class InterfazJuego extends JFrame {
     
     //Atributos Swing
-<<<<<<< Updated upstream
-    JButton jbPause, jbSalirJogo;
-    JComboBox jcIzquierda,jcDerecha;
-    JTextField jtComputadorGanadas, jtJugadorGanadas;
-    JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas;
-=======
     private JButton jbPause, jbSalirJogo, jbGuardarJugador;
     private JComboBox jcIzquierda,jcDerecha;
     private JTextField jtComputadorGanadas, jtJugadorGanadas, jtNombreJugador, jtTotalPartidas;
     private JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas, jlNombreJugador;
     private JLabel jlTotalPartidas;
     //--------------------------------------------------------------------------------------------------- 
->>>>>>> Stashed changes
     
     //Atributos
     private String personasIzquierda[] = {"Computador","Persona"};
@@ -29,16 +22,12 @@ public class InterfazJuego extends JFrame {
     private int espacioEntreBotones= 5;
     private boolean turnoJugador1= true; //Indica si es el turno del jugador 1
     //---------------------------------------------------------------------------------------------------
-<<<<<<< Updated upstream
-
-=======
     
     //Referencias
     private Tablero tablero;
 	//---------------------------------------------------------------------------------------------------
 	
 	//Metodo Constructor
->>>>>>> Stashed changes
     public InterfazJuego() {
         //Se define el JFrame y sus caracteristicas
         super("Menu juego");
@@ -90,7 +79,7 @@ public class InterfazJuego extends JFrame {
         
         //Se crea, posiciona y añade el JLabel "Jugador Computadora"
         jlComputadorInfo = new JLabel("Jugador Computadora");
-        jlComputadorInfo.setBounds(50, 60, 150, 60);
+        jlComputadorInfo.setBounds(45, 60, 150, 60);
         add(jlComputadorInfo);
         //-----------------------------------------------------------------------------------------------
         
@@ -100,28 +89,6 @@ public class InterfazJuego extends JFrame {
         add(jlComputadorGanadas);
         //-----------------------------------------------------------------------------------------------
         
-<<<<<<< Updated upstream
-        //Se crea, posiciona y añade el JLabel "Jugador 1"
-        jlJugadorInfo = new JLabel("Jugador 1");
-        jlJugadorInfo.setBounds(830, 60, 150, 60);
-        add(jlJugadorInfo);
-        //-----------------------------------------------------------------------------------------------
-        
-        //Se crea, posiciona y añade el JLabel "Partidas ganadas"
-        jlJugadorGanadas = new JLabel("Partidas ganadas");
-        jlJugadorGanadas.setBounds(830, 80, 150, 60);
-        add(jlJugadorGanadas);
-        //-----------------------------------------------------------------------------------------------
-        
-        //Se crea, posiciona y añade el JTextField "Jugadas Ganadas jugador"
-        jtJugadorGanadas = new JTextField(20);
-        jtJugadorGanadas.setBounds(800, 120, 150, 60);
-        add(jtJugadorGanadas);
-        jtJugadorGanadas.setEditable(false);
-        //-----------------------------------------------------------------------------------------------
-        
-=======
->>>>>>> Stashed changes
         //Se crea, posiciona y añade el JTextField "Jugadas Ganadas computadoras"
         jtComputadorGanadas = new JTextField(20);
         jtComputadorGanadas.setBounds(30, 120, 150, 60);
@@ -129,23 +96,6 @@ public class InterfazJuego extends JFrame {
         jtComputadorGanadas.setEditable(false);
         //-----------------------------------------------------------------------------------------------
         
-<<<<<<< Updated upstream
-        //Se crea, posiciona y añade el JComboBox izquierdo
-        jcIzquierda = new JComboBox(personasIzquierda);
-        jcIzquierda.setBounds(30, 195, 140, 30);
-        jcIzquierda.setMaximumRowCount(2);
-        add(jcIzquierda);
-        //-----------------------------------------------------------------------------------------------
-        
-        //Se crea, posiciona y añade el JComboBox derecho
-        jcDerecha= new JComboBox(personasDerecha);
-        jcDerecha.setBounds(800,195,140,30);
-        jcIzquierda.setMaximumRowCount(2);
-        add(jcDerecha);
-        //-----------------------------------------------------------------------------------------------
-        
-        //
-=======
         //Se crea, posiciona y añade el JLabel "Jugador 1"
         jlJugadorInfo = new JLabel("Jugador 1");
         jlJugadorInfo.setBounds(70, 180, 150, 60);
@@ -188,19 +138,13 @@ public class InterfazJuego extends JFrame {
         ManejadorBoton manejador= new ManejadorBoton();
         
         //Definimos la ventana como visible
->>>>>>> Stashed changes
         setVisible(true);
 		//-----------------------------------------------------------------------------------------------
 		
 		//Se concatena el ActionListener
-<<<<<<< Updated upstream
-        jbPause.addActionListener(new ManejadorBoton());
-        jbSalirJogo.addActionListener(new ManejadorBoton());
-=======
         jbPause.addActionListener(manejador);
         jbSalirJogo.addActionListener(manejador);
         jbGuardarJugador.addActionListener(manejador);
->>>>>>> Stashed changes
         //-----------------------------------------------------------------------------------------------
     }
 	
@@ -208,13 +152,6 @@ public class InterfazJuego extends JFrame {
     private class ManejadorBoton implements ActionListener {
         //Atributos para manejador
         private int opcion;
-<<<<<<< Updated upstream
-        
-        public void actionPerformed(ActionEvent e) {
-        
-            if (e.getActionCommand().equals("Boton de Pausa")) {
-                opcion= Integer.parseInt(JOptionPane.showInputDialog(null,
-=======
         //-----------------------------------------------------------------------------------------------
         
         //Referencias
@@ -242,7 +179,6 @@ public class InterfazJuego extends JFrame {
 	        
             if (accion.getSource()==jbPause) {
                 opcion= Integer.parseInt(JOptionPane.showInputDialog(
->>>>>>> Stashed changes
                         "Menu de Pausa\n1) Volver a el juego\n2) Salir del juego"));
                 switch (opcion) {
                     case 1:
@@ -257,14 +193,16 @@ public class InterfazJuego extends JFrame {
                         break;
                 }
             }
-
-            if (e.getActionCommand().equals("Salir del juego")) {
+            //-------------------------------------------------------------------------------------------
+            
+            if (accion.getSource()==jbSalirJogo) {
                 JOptionPane.showMessageDialog(null,"me cago en todo");
                 System.exit(0);
             }
-
+            //-------------------------------------------------------------------------------------------
+            
             // Si se hace clic en un botón de la cuadrícula
-            JButton boton = (JButton) e.getSource();
+            JButton boton = (JButton) accion.getSource();
             String coordenadas = boton.getText();
             if (coordenadas.startsWith("(")) {
                 if (turnoJugador1) {
@@ -280,7 +218,14 @@ public class InterfazJuego extends JFrame {
                 }
                 // Alternar el turno
                 turnoJugador1 = !turnoJugador1;
+                
+                //Verificar Si hay jugada ganadora
+                //~ if (){
+					
+				//~ } 
             }
+            //-------------------------------------------------------------------------------------------
+            
         }
     }
 

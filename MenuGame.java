@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+<<<<<<< HEAD
 //Proyecto Grupal
 
 import javax.swing.ImageIcon;
@@ -210,4 +210,4 @@ public class MenuGame extends JFrame {
         new MenuGame();
     }
 }
->>>>>>> Stashed changes
+>>>>>>> main
