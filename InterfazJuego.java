@@ -8,10 +8,19 @@ import java.util.Random;
 public class InterfazJuego extends JFrame {
     
     //Atributos Swing
+<<<<<<< Updated upstream
     JButton jbPause, jbSalirJogo;
     JComboBox jcIzquierda,jcDerecha;
     JTextField jtComputadorGanadas, jtJugadorGanadas;
     JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas;
+=======
+    private JButton jbPause, jbSalirJogo, jbGuardarJugador;
+    private JComboBox jcIzquierda,jcDerecha;
+    private JTextField jtComputadorGanadas, jtJugadorGanadas, jtNombreJugador, jtTotalPartidas;
+    private JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas, jlNombreJugador;
+    private JLabel jlTotalPartidas;
+    //--------------------------------------------------------------------------------------------------- 
+>>>>>>> Stashed changes
     
     //Atributos
     private String personasIzquierda[] = {"Computador","Persona"};
@@ -20,7 +29,16 @@ public class InterfazJuego extends JFrame {
     private int espacioEntreBotones= 5;
     private boolean turnoJugador1= true; //Indica si es el turno del jugador 1
     //---------------------------------------------------------------------------------------------------
+<<<<<<< Updated upstream
 
+=======
+    
+    //Referencias
+    private Tablero tablero;
+	//---------------------------------------------------------------------------------------------------
+	
+	//Metodo Constructor
+>>>>>>> Stashed changes
     public InterfazJuego() {
         //Se define el JFrame y sus caracteristicas
         super("Menu juego");
@@ -82,6 +100,7 @@ public class InterfazJuego extends JFrame {
         add(jlComputadorGanadas);
         //-----------------------------------------------------------------------------------------------
         
+<<<<<<< Updated upstream
         //Se crea, posiciona y añade el JLabel "Jugador 1"
         jlJugadorInfo = new JLabel("Jugador 1");
         jlJugadorInfo.setBounds(830, 60, 150, 60);
@@ -101,6 +120,8 @@ public class InterfazJuego extends JFrame {
         jtJugadorGanadas.setEditable(false);
         //-----------------------------------------------------------------------------------------------
         
+=======
+>>>>>>> Stashed changes
         //Se crea, posiciona y añade el JTextField "Jugadas Ganadas computadoras"
         jtComputadorGanadas = new JTextField(20);
         jtComputadorGanadas.setBounds(30, 120, 150, 60);
@@ -108,6 +129,7 @@ public class InterfazJuego extends JFrame {
         jtComputadorGanadas.setEditable(false);
         //-----------------------------------------------------------------------------------------------
         
+<<<<<<< Updated upstream
         //Se crea, posiciona y añade el JComboBox izquierdo
         jcIzquierda = new JComboBox(personasIzquierda);
         jcIzquierda.setBounds(30, 195, 140, 30);
@@ -123,12 +145,62 @@ public class InterfazJuego extends JFrame {
         //-----------------------------------------------------------------------------------------------
         
         //
+=======
+        //Se crea, posiciona y añade el JLabel "Jugador 1"
+        jlJugadorInfo = new JLabel("Jugador 1");
+        jlJugadorInfo.setBounds(70, 180, 150, 60);
+        add(jlJugadorInfo);
+        //-----------------------------------------------------------------------------------------------
+        
+        //Se crea, posiciona y añade el JLabel "Partidas ganadas"
+        jlJugadorGanadas = new JLabel("Partidas ganadas");
+        jlJugadorGanadas.setBounds(50, 200, 150, 60);
+        add(jlJugadorGanadas);
+        //-----------------------------------------------------------------------------------------------
+        
+        //Se crea, posiciona y añade el JTextField "Jugadas Ganadas jugador"
+        jtJugadorGanadas = new JTextField(20);
+        jtJugadorGanadas.setBounds(30, 240, 150, 60);
+        add(jtJugadorGanadas);
+        jtJugadorGanadas.setEditable(false);
+        //-----------------------------------------------------------------------------------------------
+        
+        //Se crea, posiciona y añade el JLabel "Partidas Ganadas"
+        jlNombreJugador= new JLabel ("Nombre de Jugador");
+        jlNombreJugador.setBounds(810, 60, 150, 60);
+        add(jlNombreJugador);
+        //-----------------------------------------------------------------------------------------------
+        
+        //Se crea, posiciona y añade el JTextField nombreJugador
+        jtNombreJugador= new JTextField(20);
+        jtNombreJugador.setBounds(795, 100, 150, 60);
+        add(jtNombreJugador);
+        //-----------------------------------------------------------------------------------------------
+        
+        //Se crea, posiciona y añade el JButton "Registrar Jugador"
+        jbGuardarJugador= new JButton("Registrar jugador");
+        jbGuardarJugador.setBounds(795, 170, 150, 30);
+        add(jbGuardarJugador);
+        //-----------------------------------------------------------------------------------------------
+        
+        //Instanciamos el Tablero
+        tablero= new Tablero();
+        ManejadorBoton manejador= new ManejadorBoton();
+        
+        //Definimos la ventana como visible
+>>>>>>> Stashed changes
         setVisible(true);
 		//-----------------------------------------------------------------------------------------------
 		
 		//Se concatena el ActionListener
+<<<<<<< Updated upstream
         jbPause.addActionListener(new ManejadorBoton());
         jbSalirJogo.addActionListener(new ManejadorBoton());
+=======
+        jbPause.addActionListener(manejador);
+        jbSalirJogo.addActionListener(manejador);
+        jbGuardarJugador.addActionListener(manejador);
+>>>>>>> Stashed changes
         //-----------------------------------------------------------------------------------------------
     }
 	
@@ -136,11 +208,41 @@ public class InterfazJuego extends JFrame {
     private class ManejadorBoton implements ActionListener {
         //Atributos para manejador
         private int opcion;
+<<<<<<< Updated upstream
         
         public void actionPerformed(ActionEvent e) {
         
             if (e.getActionCommand().equals("Boton de Pausa")) {
                 opcion= Integer.parseInt(JOptionPane.showInputDialog(null,
+=======
+        //-----------------------------------------------------------------------------------------------
+        
+        //Referencias
+        private Ficha jugador, computadora;
+        //-----------------------------------------------------------------------------------------------
+        
+        public void actionPerformed(ActionEvent accion) {
+	    
+			if (accion.getSource()==jbGuardarJugador){
+				
+				//Controlador espacio vacio
+				if (jtNombreJugador.getText().equals("")){
+					
+					JOptionPane.showMessageDialog(null, "Digite su nombre");
+					
+				} else {
+					jugador= new Ficha ("Azul", jtNombreJugador.getText());
+					computadora= new Ficha ("Rojo", "Computadora");
+					
+					jtNombreJugador.setEditable(false);
+				}
+				
+			}
+	        //-------------------------------------------------------------------------------------------
+	        
+            if (accion.getSource()==jbPause) {
+                opcion= Integer.parseInt(JOptionPane.showInputDialog(
+>>>>>>> Stashed changes
                         "Menu de Pausa\n1) Volver a el juego\n2) Salir del juego"));
                 switch (opcion) {
                     case 1:
