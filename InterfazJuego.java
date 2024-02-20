@@ -6,7 +6,7 @@ import java.util.Random;
 public class InterfazJuego extends JFrame {
     
     //Atributos Swing
-    private JButton jbPause, jbSalirJogo, jbGuardarJugador;
+    private JButton jbPause, jbSalirJogo, jbGuardarJugador,jbReiniciarJuego;
     private JComboBox<String> jcIzquierda, jcDerecha;
     private JTextField jtComputadorGanadas, jtJugadorGanadas, jtNombreJugador, jtTotalPartidas;
     private JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas, jlNombreJugador,jlJugador1,jlJugador2;
@@ -143,7 +143,12 @@ public class InterfazJuego extends JFrame {
         jcDerecha= new JComboBox<>(personasDerecha);
         jcDerecha.setBounds(30, 350, 150, 30);
         add(jcDerecha);
-        
+        //-----------------------------------------------------------------------------------------------
+        //Se crea el boton de reiniciar el juego
+        jbReiniciarJuego = new JButton("Reiniciar juego");
+        jbReiniciarJuego.setBounds(420, 420, 150, 20);
+        add(jbReiniciarJuego);
+
         //Se agrega ActionListener al JComboBox de la derecha
         jcDerecha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -158,6 +163,7 @@ public class InterfazJuego extends JFrame {
                     // Acción cuando se selecciona "Persona"
                     JOptionPane.showMessageDialog(null, "Se seleccionó Persona en la derecha");
                 }
+                jcDerecha.setEnabled(false);
             }
         });
         
@@ -180,6 +186,7 @@ public class InterfazJuego extends JFrame {
                     // Acción cuando se selecciona "Persona"
                     JOptionPane.showMessageDialog(null, "Se seleccionó Persona en la izquierda");
                 }
+                jcIzquierda.setEnabled(false);
             }
         });
         
@@ -192,6 +199,7 @@ public class InterfazJuego extends JFrame {
 		//-----------------------------------------------------------------------------------------------
 		
 		//Se concatena el ActionListener
+        jbReiniciarJuego.addActionListener(manejador);
         jbPause.addActionListener(manejador);
         jbSalirJogo.addActionListener(manejador);
         jbGuardarJugador.addActionListener(manejador);
@@ -209,6 +217,13 @@ public class InterfazJuego extends JFrame {
         //-----------------------------------------------------------------------------------------------
         
         public void actionPerformed(ActionEvent accion) {
+
+            if (accion.getSource()==jbReiniciarJuego) {
+                JOptionPane.showMessageDialog(null, "Reiniciando todo el tablero...");
+                dispose();
+                InterfazJuego nuevaInterfaz = new InterfazJuego();
+                
+            }
 	    
 			if (accion.getSource()==jbGuardarJugador){
 				
