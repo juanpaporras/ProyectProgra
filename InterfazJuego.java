@@ -7,7 +7,7 @@ public class InterfazJuego extends JFrame {
     
     //Atributos Swing
     private JButton jbPause, jbSalirJogo, jbGuardarJugador,jbReiniciarJuego;
-    private JComboBox<String> jcIzquierda, jcDerecha;
+    private JComboBox jcIzquierda, jcDerecha;
     private JTextField jtComputadorGanadas, jtJugadorGanadas, jtNombreJugador, jtTotalPartidas;
     private JLabel jlComputadorInfo, jlJugadorInfo, jlJugadorGanadas, jlComputadorGanadas, jlNombreJugador,jlJugador1,jlJugador2;
     private JLabel jlTotalPartidas;
@@ -15,7 +15,7 @@ public class InterfazJuego extends JFrame {
     
     //Atributos
     private String personasIzquierda[] = {"Computador","Persona"};
-    private String personasDerecha[]={"Computador","Persona"};
+    private String personasDerecha[]={"Persona","Computador"};
     private int tamanoBoton= 60;
     private int espacioEntreBotones= 5;
     private boolean turnoJugador1= true; //Indica si es el turno del jugador 1
@@ -23,6 +23,7 @@ public class InterfazJuego extends JFrame {
     
     //Referencias
     private Tablero tablero;
+	private Ficha jugador, computadora;
 	//---------------------------------------------------------------------------------------------------
 	
 	//Metodo Constructor
@@ -48,15 +49,6 @@ public class InterfazJuego extends JFrame {
             }
         }
 		//-----------------------------------------------------------------------------------------------
-        //Se crea los jlabels de los jcombo
-        jlJugador1 = new JLabel("Jugador 1");
-        jlJugador1.setBounds(45, 300, 150, 60);
-        add(jlJugador1);
-		//-----------------------------------------------------------------------------------------------
-        jlJugador2 = new JLabel("Jugador 2");
-        jlJugador2.setBounds(45, 370, 150, 60);
-        add(jlJugador2);
-        //-----------------------------------------------------------------------------------------------
 		//Se crea, posiciona y añade el boton de pausa
         jbPause = new JButton("Boton de Pausa");
         jbPause.setBounds(335, 450, 130, 30);
@@ -84,39 +76,39 @@ public class InterfazJuego extends JFrame {
         //-----------------------------------------------------------------------------------------------
         
         //Se crea, posiciona y añade el JLabel "Jugador Computadora"
-        jlComputadorInfo = new JLabel("Jugador Computadora");
-        jlComputadorInfo.setBounds(45, 60, 150, 60);
+        jlComputadorInfo = new JLabel("Jugador Azul");
+        jlComputadorInfo.setBounds(65, 60, 150, 60);
         add(jlComputadorInfo);
         //-----------------------------------------------------------------------------------------------
         
         //Se crea, posiciona y añade el JLabel "Partidas Ganadas"
         jlComputadorGanadas = new JLabel("Partidas Ganadas");
-        jlComputadorGanadas.setBounds(50, 80, 150, 60);
+        jlComputadorGanadas.setBounds(50, 110, 150, 60);
         add(jlComputadorGanadas);
         //-----------------------------------------------------------------------------------------------
         
         //Se crea, posiciona y añade el JTextField "Jugadas Ganadas computadoras"
         jtComputadorGanadas = new JTextField(20);
-        jtComputadorGanadas.setBounds(30, 120, 150, 60);
+        jtComputadorGanadas.setBounds(30, 150, 150, 60);
         add(jtComputadorGanadas);
         jtComputadorGanadas.setEditable(false);
         //-----------------------------------------------------------------------------------------------
         
         //Se crea, posiciona y añade el JLabel "Jugador 1"
-        jlJugadorInfo = new JLabel("Jugador 1");
-        jlJugadorInfo.setBounds(70, 180, 150, 60);
+        jlJugadorInfo = new JLabel("Jugador Rojo");
+        jlJugadorInfo.setBounds(65, 230, 150, 60);
         add(jlJugadorInfo);
         //-----------------------------------------------------------------------------------------------
         
         //Se crea, posiciona y añade el JLabel "Partidas ganadas"
         jlJugadorGanadas = new JLabel("Partidas ganadas");
-        jlJugadorGanadas.setBounds(50, 200, 150, 60);
+        jlJugadorGanadas.setBounds(50, 280, 150, 60);
         add(jlJugadorGanadas);
         //-----------------------------------------------------------------------------------------------
         
         //Se crea, posiciona y añade el JTextField "Jugadas Ganadas jugador"
         jtJugadorGanadas = new JTextField(20);
-        jtJugadorGanadas.setBounds(30, 240, 150, 60);
+        jtJugadorGanadas.setBounds(30, 320, 150, 60);
         add(jtJugadorGanadas);
         jtJugadorGanadas.setEditable(false);
         //-----------------------------------------------------------------------------------------------
@@ -140,59 +132,25 @@ public class InterfazJuego extends JFrame {
         //-----------------------------------------------------------------------------------------------
         
         //Se crea el JComboBox de jugador1
-        jcDerecha= new JComboBox<>(personasDerecha);
-        jcDerecha.setBounds(30, 350, 150, 30);
+        jcDerecha= new JComboBox(personasDerecha);
+        jcDerecha.setBounds(30, 270, 150, 30);
         add(jcDerecha);
+        
         //-----------------------------------------------------------------------------------------------
         //Se crea el boton de reiniciar el juego
         jbReiniciarJuego = new JButton("Reiniciar juego");
         jbReiniciarJuego.setBounds(420, 420, 150, 20);
         add(jbReiniciarJuego);
-
-        //Se agrega ActionListener al JComboBox de la derecha
-        jcDerecha.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Obtener la opción seleccionada
-                String seleccion = (String) jcDerecha.getSelectedItem();
-
-                // Hacer algo basado en la opción seleccionada
-                if (seleccion.equals("Computador")) {
-                    // Acción cuando se selecciona "Computador"
-                    JOptionPane.showMessageDialog(null, "Se seleccionó Computador en la derecha");
-                } else if (seleccion.equals("Persona")) {
-                    // Acción cuando se selecciona "Persona"
-                    JOptionPane.showMessageDialog(null, "Se seleccionó Persona en la derecha");
-                }
-                jcDerecha.setEnabled(false);
-            }
-        });
         
         //Se crea el JComboBox de jugador2
-        jcIzquierda = new JComboBox<>(personasIzquierda);
-        jcIzquierda.setBounds(30, 420, 150, 30);
+        jcIzquierda = new JComboBox(personasIzquierda);
+        jcIzquierda.setBounds(30, 100, 150, 30);
         add(jcIzquierda);
         
-        //Se agrega ActionListener al JComboBox de la izquierda
-        jcIzquierda.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Obtener la opción seleccionada
-                String seleccion = (String) jcIzquierda.getSelectedItem();
-
-                // Hacer algo basado en la opción seleccionada
-                if (seleccion.equals("Computador")) {
-                    // Acción cuando se selecciona "Computador"
-                    JOptionPane.showMessageDialog(null, "Se seleccionó Computador en la izquierda");
-                } else if (seleccion.equals("Persona")) {
-                    // Acción cuando se selecciona "Persona"
-                    JOptionPane.showMessageDialog(null, "Se seleccionó Persona en la izquierda");
-                }
-                jcIzquierda.setEnabled(false);
-            }
-        });
-        
-        //Instanciamos el Tablero
+        //Instanciamos el Tablero y los manejadores
         tablero= new Tablero();
         ManejadorBoton manejador= new ManejadorBoton();
+        ManejadorJugador manejadorJugador = new ManejadorJugador();
         
         //Definimos la ventana como visible
         setVisible(true);
@@ -202,7 +160,9 @@ public class InterfazJuego extends JFrame {
         jbReiniciarJuego.addActionListener(manejador);
         jbPause.addActionListener(manejador);
         jbSalirJogo.addActionListener(manejador);
-        jbGuardarJugador.addActionListener(manejador);
+        jbGuardarJugador.addActionListener(manejadorJugador);
+        jcIzquierda.addActionListener(manejadorJugador);
+        jcDerecha.addActionListener(manejadorJugador);
         //-----------------------------------------------------------------------------------------------
     }
 	
@@ -213,7 +173,7 @@ public class InterfazJuego extends JFrame {
         //-----------------------------------------------------------------------------------------------
         
         //Referencias
-        private Ficha jugador, computadora;
+        
         //-----------------------------------------------------------------------------------------------
         
         public void actionPerformed(ActionEvent accion) {
@@ -224,22 +184,6 @@ public class InterfazJuego extends JFrame {
                 InterfazJuego nuevaInterfaz = new InterfazJuego();
                 
             }
-	    
-			if (accion.getSource()==jbGuardarJugador){
-				
-				//Controlador espacio vacio
-				if (jtNombreJugador.getText().equals("")){
-					
-					JOptionPane.showMessageDialog(null, "Digite su nombre");
-					
-				} else {
-					jugador= new Ficha ("Azul", jtNombreJugador.getText());
-					computadora= new Ficha ("Rojo", "Computadora");
-					
-					jtNombreJugador.setEditable(false);
-				}
-				
-			}
 	        //-------------------------------------------------------------------------------------------
 	        
             if (accion.getSource()==jbPause) {
@@ -269,30 +213,107 @@ public class InterfazJuego extends JFrame {
             // Si se hace clic en un botón de la cuadrícula
             JButton boton = (JButton) accion.getSource();
             String coordenadas = boton.getText();
-            if (coordenadas.startsWith("(")) {
-                if (turnoJugador1) {
-                    JOptionPane.showMessageDialog(rootPane, "Turno del Jugador 1");
-                    boton.setEnabled(false);
-                    Toolkit.getDefaultToolkit().beep();
-                    boton.setBackground(Color.RED);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Turno del Jugador 2");
-                    boton.setEnabled(false);
-                    Toolkit.getDefaultToolkit().beep();
-                    boton.setBackground(Color.BLUE);
-                }
-                // Alternar el turno
-                turnoJugador1 = !turnoJugador1;
-                
-                //Verificar Si hay jugada ganadora
-                //~ if (){
-					
-				//~ } 
-            }
+            if (jugador!=null && computadora!=null){
+	            if (coordenadas.startsWith("(")) {
+	                if (turnoJugador1) {
+	                    JOptionPane.showMessageDialog(rootPane, "Turno del Jugador 1");
+	                    boton.setEnabled(false);
+	                    Toolkit.getDefaultToolkit().beep();
+	                    boton.setBackground(Color.RED);
+	                } else {
+	                    JOptionPane.showMessageDialog(rootPane, "Turno del Jugador 2");
+	                    boton.setEnabled(false);
+	                    Toolkit.getDefaultToolkit().beep();
+	                    boton.setBackground(Color.BLUE);
+	                }
+	                // Alternar el turno
+	                turnoJugador1 = !turnoJugador1;
+	                
+	                //Verificar Si hay jugada ganadora
+	                //~ if (){
+						
+					//~ } 
+	            }
+			} else {
+				
+				JOptionPane.showMessageDialog(null, "Primero defina los jugadores");
+				
+			}
             //-------------------------------------------------------------------------------------------
             
         }
     }
+    
+    private class ManejadorJugador implements ActionListener{
+		//Atributos del manejador
+		private String colorXcomputador="Azul", nombreXjugador, colorXjugador="Rojo";
+		//-----------------------------------------------------------------------------------------------
+		
+		public void actionPerformed (ActionEvent accionJC){
+			
+			if  (accionJC.getSource()==jcIzquierda){
+				
+				if (jcIzquierda.getSelectedItem().equals("Computador")){
+					
+					jcDerecha.setSelectedItem("Persona");
+					colorXcomputador="Azul";
+					colorXjugador="Rojo";
+					 
+				} else if (jcIzquierda.getSelectedItem().equals("Persona")){
+					
+					jcDerecha.setSelectedItem("Computador");
+					colorXjugador="Azul";
+					colorXcomputador="Rojo";
+					
+				}
+				
+				
+			} 
+			//-------------------------------------------------------------------------------------------
+			
+			if (accionJC.getSource()==jcDerecha){
+				
+				if (jcDerecha.getSelectedItem().equals("Persona")){
+					
+					jcIzquierda.setSelectedItem("Computador");
+					colorXjugador="Rojo";
+					colorXcomputador="Azul";
+					 
+				} else if (jcDerecha.getSelectedItem().equals("Computador")){
+					
+					jcIzquierda.setSelectedItem("Persona");
+					colorXcomputador="Rojo";
+					colorXjugador="Azul";
+					
+				}
+				
+				
+			}
+			//-------------------------------------------------------------------------------------------
+			
+			if (accionJC.getSource()==jbGuardarJugador){
+				
+				if (jtNombreJugador.getText().equals("")){
+					
+					JOptionPane.showMessageDialog(null, "Jugador sin nombre"); 
+	
+				} else {
+					
+					nombreXjugador=jtNombreJugador.getText();
+					jugador= new Ficha (colorXjugador, nombreXjugador);
+					computadora= new Ficha (colorXcomputador, "Computador");
+					
+					jtNombreJugador.setEditable(false);
+					jbGuardarJugador.setEnabled(false);
+					
+					JOptionPane.showMessageDialog(null, jugador.getColorFicha() +" || "+ jugador.getNombre()+ "\n"+computadora.getColorFicha()+" || "+ computadora.getNombre() );
+				}
+				
+			}
+			//-------------------------------------------------------------------------------------------
+		}
+		
+	}
 
     public static void main(String[] args) {
         InterfazJuego inter = new InterfazJuego();
