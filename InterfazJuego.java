@@ -295,7 +295,7 @@ public class InterfazJuego extends JFrame {
 				
 				if (jtNombreJugador.getText().equals("")){
 					
-					JOptionPane.showMessageDialog(null, "Jugador sin nombre");
+					JOptionPane.showMessageDialog(null, "Jugador sin nombre"); 
 	
 				} else {
 					
