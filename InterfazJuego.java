@@ -269,7 +269,6 @@ public class InterfazJuego extends JFrame {
 				}
 				
 			}
-=======
 
             if (accion.getSource()==jbReiniciarJuego) {
                 JOptionPane.showMessageDialog(null, "Reiniciando todo el tablero...");
@@ -277,7 +276,7 @@ public class InterfazJuego extends JFrame {
                 InterfazJuego nuevaInterfaz = new InterfazJuego();
                 
             }
->>>>>>> Stashed changes
+
 	        //-------------------------------------------------------------------------------------------
 	        
             if (accion.getSource()==jbPause) {
