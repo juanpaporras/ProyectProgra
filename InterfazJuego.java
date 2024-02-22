@@ -199,12 +199,23 @@ public class InterfazJuego extends JFrame {
             if (jugador != null && computadora != null) {
                 if (coordenadas.startsWith("(")) {
                     if (turnoJugador1) {
+<<<<<<< HEAD
                         jtTurno.setText(turno1);
+=======
+                        turno = "Turno del jugador rojo";
+                        jtTurno.setText(turno);
+>>>>>>> 5514a547c67e0862131108bd825c5f32ab610167
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
+
                         boton.setBackground(Color.RED);
                     } else {
+<<<<<<< HEAD
                         jtTurno.setText(turno2);
+=======
+                        turno = "Turno del jugador amarrilo ";
+                        jtTurno.setText(turno);
+>>>>>>> 5514a547c67e0862131108bd825c5f32ab610167
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
                         boton.setBackground(Color.yellow);
