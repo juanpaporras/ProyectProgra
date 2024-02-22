@@ -4,12 +4,9 @@ public class Tablero{
 	
 	//Atributos 
 	private boolean realizado;
-	private int posicion, igualAzul, igualRojo;
-	private String colorGanador;
-	//---------------------------------------------------------------------------------------------------
-	
+	private int posicion;
+    //---------------------------------------------------------------------------------------------------
 	//Referencias
-	private Ficha ficha;
 	private Ficha tablero [][];
 	//---------------------------------------------------------------------------------------------------
 	
@@ -77,8 +74,6 @@ public class Tablero{
 	
 	//Metodo ganador en linea horizontal
 	private boolean ganadorEnColumna (int fila, int columna){
-		int iguales=0;
-		
 		if (tablero[fila][columna].getColorFicha().equals("azul")){
 			if (tablero[fila][(columna-1)]!=null && tablero[fila][(columna-1)].getColorFicha().equals("azul")){
 				if (tablero[fila][(columna-2)]!=null && tablero[fila][(columna-2)].getColorFicha().equals("azul")){
