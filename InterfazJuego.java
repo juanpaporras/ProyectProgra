@@ -197,17 +197,17 @@ public class InterfazJuego extends JFrame {
             if (jugador != null && computadora != null) {
                 if (coordenadas.startsWith("(")) {
                     if (turnoJugador1) {
-                        turno = "Turno del " + color.colorXjugador + " en la posición: ("
-                                + fila + ", " + columna + ")";
+                        turno = "Turno del  en la posición:";
+                        jtTurno.setText(turno);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
                         boton.setBackground(Color.RED);
                     } else {
-                        turno = "Turno del " + color.colorXcomputador + " en la posición: ("
-                                + fila + ", " + columna + ")";
+                        turno = "Turno del  en la posición: ";
+                        jtTurno.setText(turno);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
-                        boton.setBackground(Color.BLUE);
+                        boton.setBackground(Color.yellow);
                     }
                     // Alternar el turno
                     turnoJugador1 = !turnoJugador1;
