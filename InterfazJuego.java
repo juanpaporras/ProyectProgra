@@ -15,7 +15,7 @@ public class InterfazJuego extends JFrame {
     // ---------------------------------------------------------------------------------------------------
 
     // Atributos
-    private String turno;
+    private String turno1, turno2;
     private String seleccionAmarillo[] = { "Computador", "Persona" };
     private String seleccionRojo[] = { "Persona", "Computador" };
     private int tamanoBoton = 60;
@@ -89,7 +89,7 @@ public class InterfazJuego extends JFrame {
         // -----------------------------------------------------------------------------------------------
 
         // Se crea, posiciona y añade el JLabel "Jugador Amarillo"
-        jlJugadorAmarillo = new JLabel("Jugador Azul");
+        jlJugadorAmarillo = new JLabel("Jugador Amarillo");
         jlJugadorAmarillo.setBounds(65, 60, 150, 60);
         add(jlJugadorAmarillo);
         // -----------------------------------------------------------------------------------------------
@@ -181,30 +181,44 @@ public class InterfazJuego extends JFrame {
 
     // Manejador de botón
     private class ManejadorBoton implements ActionListener {
+        //Atributos
+        private String turnoColor;
+        private int fila, columna;
+        
         // Referencias
-        private ManejadorJugador color;
 
         public void actionPerformed(ActionEvent accion) {
             // Si se hace clic en un botón de la cuadrícula
             JButton boton = (JButton) accion.getSource();
             String coordenadas = boton.getText();
             String[] coordenadasArray = coordenadas.split(",");
-            int fila = Integer.parseInt(coordenadasArray[0].substring(1)); // Obtenemos la fila
-            int columna = Integer.parseInt(coordenadasArray[1].substring(0, coordenadasArray[1].length() - 1)); // Obtenemos
+            fila = Integer.parseInt(coordenadasArray[0].substring(1)); // Obtenemos la fila
+             columna = Integer.parseInt(coordenadasArray[1].substring(0, coordenadasArray[1].length() - 1)); // Obtenemos
                                                                                                                 // la
                                                                                                                 // columna
             System.out.println(columna);
             if (jugador != null && computadora != null) {
                 if (coordenadas.startsWith("(")) {
                     if (turnoJugador1) {
-                        turno = "Turno del  en la posición:";
-                        jtTurno.setText(turno);
+						
+						//~ fila=tablero.realizarMovimiento(columna, jugador);
+						//~ for (int i=0; i==6; i++){
+							 //~ boton.setBackground(Color.RED);
+							 //~ Thread.sleep(2000);
+							//~ if (i==fila){
+								 //~ boton.setBackground(Color.RED);
+								 //~ break;
+							//~ }
+						//~ }
+						
+						 boton.setBackground(Color.RED);
+                        jtTurno.setText(turno1);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
-                        boton.setBackground(Color.RED);
+
+                       
                     } else {
-                        turno = "Turno del  en la posición: ";
-                        jtTurno.setText(turno);
+                        jtTurno.setText(turno2);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
                         boton.setBackground(Color.yellow);
@@ -226,47 +240,70 @@ public class InterfazJuego extends JFrame {
     // Manejador de jugador
     private class ManejadorJugador implements ActionListener {
         // Atributos del manejador
-        private String colorXcomputador = "Amarillo", nombreXjugador, colorXjugador = "Rojo";
+        public String colorXcomputador = "Amarillo", nombreXjugador, colorXjugador = "Rojo";
 
         public void actionPerformed(ActionEvent accionJC) {
 
             if (accionJC.getSource() == jcJugadorAmarillo) {
+				
                 if (jcJugadorAmarillo.getSelectedItem().equals("Computador")) {
+					
                     jcJugadorRojo.setSelectedItem("Persona");
                     colorXcomputador = "Amarillo";
                     colorXjugador = "Rojo";
+                    
                 } else if (jcJugadorAmarillo.getSelectedItem().equals("Persona")) {
+					
                     jcJugadorRojo.setSelectedItem("Computador");
                     colorXjugador = "Amarillo";
                     colorXcomputador = "Rojo";
+                    
                 }
+                
             }
             // -------------------------------------------------------------------------------------------
 
             if (accionJC.getSource() == jcJugadorRojo) {
+				
                 if (jcJugadorRojo.getSelectedItem().equals("Persona")) {
+					
                     jcJugadorAmarillo.setSelectedItem("Computador");
                     colorXjugador = "Rojo";
                     colorXcomputador = "Amarillo";
+                    
                 } else if (jcJugadorRojo.getSelectedItem().equals("Computador")) {
+					
                     jcJugadorAmarillo.setSelectedItem("Persona");
                     colorXcomputador = "Rojo";
                     colorXjugador = "Amarillo";
+                    
                 }
             }
             // -------------------------------------------------------------------------------------------
 
             if (accionJC.getSource() == jbGuardarJugador) {
+				
                 if (jtNombreJugador.getText().equals("")) {
+					
                     JOptionPane.showMessageDialog(null, "Jugador sin nombre");
+                    
                 } else {
+					
                     nombreXjugador = jtNombreJugador.getText();
+                    
                     jugador = new Ficha(colorXjugador, nombreXjugador);
                     computadora = new Ficha(colorXcomputador, "Computador");
+                    
+                    turno1=colorXcomputador;
+                    turno2=colorXjugador;
+                    
                     jtNombreJugador.setEditable(false);
                     jbGuardarJugador.setEnabled(false);
+                    
                     JOptionPane.showMessageDialog(null, jugador.getColorFicha() + " || " + jugador.getNombre() + "\n"
                             + computadora.getColorFicha() + " || " + computadora.getNombre());
+                            
+                            tablero.iniciarTablero();
                 }
             }
             // -------------------------------------------------------------------------------------------
