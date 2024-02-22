@@ -197,13 +197,14 @@ public class InterfazJuego extends JFrame {
             if (jugador != null && computadora != null) {
                 if (coordenadas.startsWith("(")) {
                     if (turnoJugador1) {
-                        turno = "Turno del  en la posición:";
+                        turno = "Turno del jugador rojo";
                         jtTurno.setText(turno);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
+
                         boton.setBackground(Color.RED);
                     } else {
-                        turno = "Turno del  en la posición: ";
+                        turno = "Turno del jugador amarrilo ";
                         jtTurno.setText(turno);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
