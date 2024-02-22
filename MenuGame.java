@@ -95,7 +95,7 @@ public class MenuGame extends JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Necesitas conectar 4 fichas en una linea para poder ganar\n               Intenta evitar los ataques de tu enemigo \n                                        !Suerte!");
             }
             if (evento.getActionCommand().equals("Creadores")) {
-                JOptionPane.showMessageDialog(rootPane, "Proyecto Elaborado por:\nJuan Pablo Porras Alvarado C36086 \nJordy Steven Ramirez Esquivel C36395\nUniversidad de Costa Rica\nProgramación 1");
+                JOptionPane.showMessageDialog(rootPane, "Proyecto Elaborado por:\nJuan Pablo Porras Alvarado C36086 \nAxel Obando Bermudez c25595\nUniversidad de Costa Rica\nProgramación 1");
             }
         }
     }
