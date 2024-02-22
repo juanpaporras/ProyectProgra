@@ -181,6 +181,9 @@ public class InterfazJuego extends JFrame {
 
     // Manejador de botón
     private class ManejadorBoton implements ActionListener {
+        //Atributos
+        private String turnoColor;
+        
         // Referencias
         private ManejadorJugador color;
 
@@ -197,13 +200,13 @@ public class InterfazJuego extends JFrame {
             if (jugador != null && computadora != null) {
                 if (coordenadas.startsWith("(")) {
                     if (turnoJugador1) {
-                        turno = "Turno del  en la posición:";
+						turno=colorXjugador;
                         jtTurno.setText(turno);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
                         boton.setBackground(Color.RED);
                     } else {
-                        turno = "Turno del  en la posición: ";
+						turno=colorXcomputador;
                         jtTurno.setText(turno);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
@@ -226,7 +229,7 @@ public class InterfazJuego extends JFrame {
     // Manejador de jugador
     private class ManejadorJugador implements ActionListener {
         // Atributos del manejador
-        private String colorXcomputador = "Amarillo", nombreXjugador, colorXjugador = "Rojo";
+        public String colorXcomputador = "Amarillo", nombreXjugador, colorXjugador = "Rojo";
 
         public void actionPerformed(ActionEvent accionJC) {
 
