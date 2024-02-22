@@ -183,11 +183,44 @@ public class InterfazJuego extends JFrame {
     private class ManejadorBoton implements ActionListener {
         //Atributos
         private String turnoColor;
-        private int fila, columna;
+        private int fila, columna, opcion;
         
         // Referencias
+        
+        public void actionPerformed(ActionEvent accion) { 
 
-        public void actionPerformed(ActionEvent accion) {
+            if (accion.getSource()==jbReiniciarJuego) {
+                JOptionPane.showMessageDialog(null, "Reiniciando todo el tablero..."); 
+                dispose();
+                InterfazJuego nuevaInterfaz = new InterfazJuego();
+                
+            }
+	        //-------------------------------------------------------------------------------------------
+	        
+            if (accion.getSource()==jbPause) {
+                opcion= Integer.parseInt(JOptionPane.showInputDialog(
+                        "Menu de Pausa\n1) Volver a el juego\n2) Salir del juego"));
+                switch (opcion) {
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Volviendo a el juego...");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Saliendo....");
+                        dispose();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Debe seleccionar una opción válida");
+                        break;
+                }
+            }
+            //-------------------------------------------------------------------------------------------
+            
+            if (accion.getSource()==jbSalirJogo) {
+                JOptionPane.showMessageDialog(null,"me cago en todo");
+                System.exit(0);
+            }
+            //-------------------------------------------------------------------------------------------
+            
             // Si se hace clic en un botón de la cuadrícula
             JButton boton = (JButton) accion.getSource();
             String coordenadas = boton.getText();
