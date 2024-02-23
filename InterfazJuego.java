@@ -212,49 +212,66 @@ public class InterfazJuego extends JFrame {
             
             columna = Integer.parseInt(coordenadasArray[1].substring(0, coordenadasArray[1].length() - 1));
             
+            //Verifica si los objetos ya estan creados
             if (jugador != null && computadora != null) {
                 
-                if (coordenadas.startsWith("(")) {
+                //Verifica si la posicion está ocupada o si en la posición de la fila posterior esta llena 
+                if (tablero.verificarMovimiento(fila, columna)==true){
+	                
+	                if (coordenadas.startsWith("(")) {
+						
+	                    if (turno.equals("Rojo")) {
+							
+	                        Toolkit.getDefaultToolkit().beep();
+	                        ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
+	                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
+	                        boton.setIcon(new ImageIcon(imagen));
+	                        boton.setFocusable(false);
+	                        
+	                    } else if (turno.equals("Amarillo")){
+							
+	                        //boton.setEnabled(false);
+	                        Toolkit.getDefaultToolkit().beep();
+	                        ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
+	                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
+	                        boton.setIcon(new ImageIcon(imagen));
+	                        boton.setBackground(Color.yellow);
+	                        
+	                    }
+	                    
+	                    boton.setBackground(null);
+	                    
+	                } 
+	                
+	                //Alterna turno y registra jugadas en el tablero
+	                if (colorXjugador.equals(turno)){
+						
+						tablero.realizarMovimiento(fila, columna, jugador);
+						turno=colorXcomputador;
+						
+					} else if (colorXcomputador.equals(turno)){
+						
+						tablero.realizarMovimiento(fila, columna, computadora);
+						turno=colorXjugador;
+						
+					}
 					
-                    if (turno.equals("Rojo")) {
-                        Toolkit.getDefaultToolkit().beep();
-                        ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
-                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
-                        boton.setIcon(new ImageIcon(imagen));
-                        boton.setFocusable(false);
-                    } else if (turno.equals("Amarillo")){
-                        //boton.setEnabled(false);
-                        Toolkit.getDefaultToolkit().beep();
-                        ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
-                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
-                        boton.setIcon(new ImageIcon(imagen));
-                        boton.setBackground(Color.yellow);
-                    }
-                    boton.setEnabled(false);
-                    boton.setBackground(null);
-                    
-                } 
-                
-                if (colorXjugador.equals(turno)){
-					
-					tablero.realizarMovimiento(fila, columna, jugador);
-					turno=colorXcomputador;
-					
-				} else if (colorXcomputador.equals(turno)){
-					
-					tablero.realizarMovimiento(fila, columna, computadora);
-					turno=colorXjugador;
-					
-				}
+					//Registra en el TextField el turno siguiente
+					jtTurno.setText(turno);
+	                
+	                //Verifica si hay ganador en linea vertical, libea horizontal y en X
+	                if (tablero.verificarGanador()!=null){
+						
+						ganador=tablero.verificarGanador();
+						JOptionPane.showMessageDialog(null,"el ganador es: "+ ganador.getNombre());
+						
+					}
 				
-				jtTurno.setText(turno);
-                
-                if (tablero.verificarGanador()!=null){
-					
-					ganador=tablero.verificarGanador();
-					JOptionPane.showMessageDialog(null,"el ganador es: "+ ganador.getNombre());
-					
-				}
+			} else {
+				
+				JOptionPane.showMessageDialog(null, "Jugada no disponible");
+				
+			}
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Primero defina los jugadores");
