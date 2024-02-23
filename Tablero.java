@@ -10,6 +10,7 @@ public class Tablero {
 	private Ficha tablero[][];
 	// ---------------------------------------------------------------------------------------------------
 
+<<<<<<< Updated upstream
 	// Metodo Constructor
 	public Tablero() {
 		tablero = new Ficha[6][7];
@@ -25,10 +26,20 @@ public class Tablero {
 			for (int columna = 0; columna < tablero[fila].length; columna++) {
 				tablero[fila][columna] = null;
 				realizado = true;
+=======
+	//Inicializar tablero
+	public void iniciarTablero (){
+		realizado= false;
+		
+		for (int fila=0; fila<tablero.length; fila++){
+			for (int columna=0; columna<tablero[fila].length; columna++){
+				tablero[fila][columna]=null;
+>>>>>>> Stashed changes
 			}
 		}
-		return realizado;
+		
 	}
+<<<<<<< Updated upstream
 	// Se vacían todos los espacios al inicio de cada partida
 	// ---------------------------------------------------------------------------------------------------
 
@@ -66,6 +77,27 @@ public class Tablero {
 							|| ganadorVerticalDerechaIzquierda(fila, columna) == true
 							|| ganadorVerticalIzquierdaDerecha(fila, columna) == true) {
 
+=======
+	//Se vacían todos los espacios al inicio de cada partida
+	//---------------------------------------------------------------------------------------------------
+	
+	//Realizar movimiento
+	public void realizarMovimiento (int fila, int columna, Ficha jugada){
+
+		tablero[fila][columna]=jugada;
+		
+	} 
+	//---------------------------------------------------------------------------------------------------
+	
+	//Metodo verificar un ganador
+	public Ficha verificarGanador (){
+		
+		for (int fila=5; fila>=0; fila--){
+			for (int columna=6; columna>=0; columna--){
+				if (tablero[fila][columna]!=null){
+					if (ganadorEnColumna(fila, columna)==true || ganadorFila(fila, columna)==true || ganadorVerticalDerechaIzquierda(fila, columna)==true || ganadorVerticalIzquierdaDerecha(fila, columna)==true){  
+						
+>>>>>>> Stashed changes
 						return tablero[fila][columna];
 
 					}
@@ -74,6 +106,7 @@ public class Tablero {
 		}
 		return null;
 	}
+<<<<<<< Updated upstream
 	// ---------------------------------------------------------------------------------------------------
 
 	// Metodo ganador en linea horizontal
@@ -101,6 +134,102 @@ public class Tablero {
 
 						return realizado = true;
 
+=======
+	//---------------------------------------------------------------------------------------------------
+	
+	//Metodo ganador en linea horizontal
+	private boolean ganadorEnColumna (int fila, int columna){
+		realizado=false;
+		
+		if (columna > 2){
+			if (tablero[fila][columna].getColorFicha().equals("Amarillo")){
+				if (tablero[fila][(columna-1)]!=null && tablero[fila][(columna-1)].getColorFicha().equals("Amarillo")){
+					if (tablero[fila][(columna-2)]!=null && tablero[fila][(columna-2)].getColorFicha().equals("Amarillo")){
+						if (tablero[fila][(columna-3)]!=null && tablero[fila][(columna-3)].getColorFicha().equals("Amarillo")){
+							
+							return realizado=true;
+							
+						}
+					}
+				}
+				
+			} else if (tablero[fila][columna].getColorFicha().equals("Rojo")){
+				if (tablero[fila][(columna-1)]!=null && tablero[fila][(columna-1)].getColorFicha().equals("Rojo")){
+					if (tablero[fila][(columna-2)]!=null && tablero[fila][(columna-2)].getColorFicha().equals("Rojo")){
+						if (tablero[fila][(columna-3)]!=null && tablero[fila][(columna-3)].getColorFicha().equals("Rojo")){
+							
+							return realizado=true;
+							
+						}
+					}
+				}
+			}
+		}
+
+		
+		
+		return realizado;
+	}
+	//---------------------------------------------------------------------------------------------------
+	
+	//Metodo ganador linea vertical
+	private boolean ganadorFila (int fila, int columna){
+		realizado=false;
+		
+		if (fila > 2) {
+			if (tablero[fila][columna].getColorFicha().equals("Amarillo")){
+				if (tablero[(fila-1)][(columna)]!=null && tablero[(fila-1)][(columna)].getColorFicha().equals("Amarillo")){
+					if (tablero[(fila-2)][(columna)]!=null && tablero[(fila-2)][(columna)].getColorFicha().equals("Amarillo")){
+						if (tablero[(fila-3)][(columna)]!=null && tablero[(fila-3)][(columna)].getColorFicha().equals("Amarillo")){
+	
+							return realizado=true;
+							
+						}
+					}
+				}
+				
+			} else if (tablero[fila][columna].getColorFicha().equals("Rojo")){
+				if (tablero[(fila-1)][(columna)]!=null && tablero[(fila-1)][(columna)].getColorFicha().equals("Rojo")){
+					if (tablero[(fila-2)][(columna)]!=null && tablero[(fila-2)][(columna)].getColorFicha().equals("Rojo")){
+						if (tablero[(fila-3)][(columna)]!=null && tablero[(fila-3)][(columna)].getColorFicha().equals("Rojo")){
+							
+							return realizado=true;
+							
+						}
+					}
+				}
+			}
+		}
+		
+		return realizado;
+	}
+	//---------------------------------------------------------------------------------------------------
+	
+	//~ //Metodo ganador en diagonal
+	private boolean ganadorVerticalDerechaIzquierda (int fila, int columna){
+		realizado=false;
+		
+		if (fila > 2 && columna > 2) {
+			if (tablero[fila][columna].getColorFicha().equals("Amarillo")){
+				if (tablero[(fila-1)][(columna-1)]!=null && tablero[(fila-1)][(columna-1)].getColorFicha().equals("Amarillo")){
+					if (tablero[(fila-2)][(columna-2)]!=null && tablero[(fila-2)][(columna-2)].getColorFicha().equals("Amarillo")){
+						if (tablero[(fila-3)][(columna-3)]!=null && tablero[(fila-3)][(columna-3)].getColorFicha().equals("Amarillo")){
+							
+							return realizado=true;
+							
+						}
+					}
+				}
+				
+			} else if (tablero[fila][columna].getColorFicha().equals("Rojo")){
+				if (tablero[(fila-1)][(columna-1)]!=null && tablero[(fila-1)][(columna-1)].getColorFicha().equals("Rojo")){
+					if (tablero[(fila-2)][(columna-2)]!=null && tablero[(fila-2)][(columna-2)].getColorFicha().equals("Rojo")){
+						if (tablero[(fila-3)][(columna-3)]!=null && tablero[(fila-3)][(columna-3)].getColorFicha().equals("Rojo")){
+							
+							return realizado=true;
+							
+						}
+>>>>>>> Stashed changes
 					}
 				}
 			}
@@ -108,6 +237,7 @@ public class Tablero {
 
 		return realizado;
 	}
+<<<<<<< Updated upstream
 	// ---------------------------------------------------------------------------------------------------
 
 	// Metodo ganador linea vertical
@@ -137,11 +267,40 @@ public class Tablero {
 
 						return realizado = true;
 
+=======
+	
+	public boolean ganadorVerticalIzquierdaDerecha (int fila, int columna){
+		realizado=false;
+		
+		if (fila > 2 && columna < 4) {
+			if (tablero[fila][columna]!=null && tablero[fila][columna].getColorFicha().equals("Amarillo")){
+				if (tablero[(fila-1)][(columna+1)]!=null && tablero[(fila-1)][(columna+1)].getColorFicha().equals("Amarillo")){
+					if (tablero[(fila-2)][(columna+2)]!=null && tablero[(fila-2)][(columna+2)].getColorFicha().equals("Amarillo")){
+						if (tablero[(fila-3)][(columna+3)]!=null && tablero[(fila-3)][(columna+3)].getColorFicha().equals("Amarillo")){
+							
+							return realizado=true;
+							
+						}
+					}
+				}
+				
+			} else if (tablero[fila][columna].getColorFicha().equals("Rojo")){
+				if (tablero[(fila-1)][(columna+1)]!=null && tablero[(fila-1)][(columna+1)].getColorFicha().equals("Rojo")){
+					if (tablero[(fila-2)][(columna+2)]!=null && tablero[(fila-2)][(columna+2)].getColorFicha().equals("Rojo")){
+						if (tablero[(fila-3)][(columna+3)]!=null && tablero[(fila-3)][(columna+3)].getColorFicha().equals("Rojo")){
+							
+							return realizado=true; 
+							
+						}
+>>>>>>> Stashed changes
 					}
 				}
 			}
 		}
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 		return realizado;
 	}
 	// ---------------------------------------------------------------------------------------------------
