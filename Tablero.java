@@ -4,6 +4,7 @@ public class Tablero{
 	
 	//Atributos 
 	private boolean realizado;
+	private boolean infoJugada;
 	private int posicion;
     //---------------------------------------------------------------------------------------------------
 	//Referencias
@@ -31,11 +32,35 @@ public class Tablero{
 	//Se vacían todos los espacios al inicio de cada partida
 	//---------------------------------------------------------------------------------------------------
 	
+	//verificar movimiento
+	public boolean verificarMovimiento (int fila, int columna){
+		realizado=false;
+		
+		
+		if (tablero[fila][columna]==null){
+			
+			if  (fila==5){
+			
+				return realizado=true;
+			
+			} else if  (tablero[(fila+1)][columna]!=null){
+				
+				return realizado=true;
+				
+			}
+			
+		}
+		
+		return realizado;
+	} 
+	//---------------------------------------------------------------------------------------------------
+	
 	//Realizar movimiento
-	public void realizarMovimiento (int fila, int columna, Ficha jugada){
-
+	public String realizarMovimiento (int fila, int columna, Ficha jugada){
+									
 		tablero[fila][columna]=jugada;
 		
+		return null;
 	} 
 	//---------------------------------------------------------------------------------------------------
 	

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
+import javax.swing.JMenuBar; 
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -95,7 +95,7 @@ public class MenuGame extends JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Necesitas conectar 4 fichas en una linea para poder ganar\n               Intenta evitar los ataques de tu enemigo \n                                        !Suerte!");
             }
             if (evento.getActionCommand().equals("Creadores")) {
-                JOptionPane.showMessageDialog(rootPane, "Proyecto Elaborado por:\nJuan Pablo Porras Alvarado C36086 \nAxel Obando Bermudez C25595\nUniversidad de Costa Rica\nProgramación 1");
+                JOptionPane.showMessageDialog(rootPane, "Proyecto Elaborado por:\nJuan Pablo Porras Alvarado C36086 \nAxel Obando Bermudez c25595\nUniversidad de Costa Rica\nProgramación 1");
             }
         }
     }
