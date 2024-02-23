@@ -11,7 +11,7 @@ public class InterfazJuego extends JFrame {
     JComboBox jcJugadorAmarillo, jcJugadorRojo;
     JTextField jtAmarilloGanadas, jtRojoGanadas, jtNombreJugador, jtTurno;
     JLabel jlJugadorAmarillo, jlJugadorRojo, jlRojoGanadas, jlAmarilloGanadas;
-    JLabel jlNombreJugador, jlTurno;
+    JLabel jlNombreJugador, jlTurno,jlInfor;
     // ---------------------------------------------------------------------------------------------------
 
     // Atributos
@@ -99,7 +99,11 @@ public class InterfazJuego extends JFrame {
         jlJugadorAmarillo.setBounds(65, 60, 150, 60);
         add(jlJugadorAmarillo);
         // -----------------------------------------------------------------------------------------------
-
+        // Se crea y posiciona y añade el Jlabel "Informacion"
+        jlInfor = new JLabel("Informacion importante");
+        jlInfor.setBounds(800, 330, 3000, 30);
+        add(jlInfor);
+        // -----------------------------------------------------------------------------------------------
         // Se crea, posiciona y añade el JLabel "Partidas Ganadas"
         jlAmarilloGanadas = new JLabel("Partidas Ganadas");
         jlAmarilloGanadas.setBounds(50, 110, 150, 60);
@@ -183,7 +187,7 @@ public class InterfazJuego extends JFrame {
         jbGuardarJugador.addActionListener(manejadorJugador);
         jcJugadorAmarillo.addActionListener(manejadorJugador);
         jcJugadorRojo.addActionListener(manejadorJugador);
-        JOptionPane.showMessageDialog(null,"Hola!");
+        JOptionPane.showMessageDialog(null,"Hola! Bienvenido a conecta 4 \nEste es un tablero con gravedad por lo cual debes\ndepositar fichas en lugares donde haya una por debajo");
         // -----------------------------------------------------------------------------------------------
     }
 
@@ -217,15 +221,12 @@ public class InterfazJuego extends JFrame {
 	                if (coordenadas.startsWith("(")) {
 						
 	                    if (turno.equals("Rojo")) {
-							
 	                        Toolkit.getDefaultToolkit().beep();
 	                        ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
 	                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
 	                        boton.setIcon(new ImageIcon(imagen));
 	                        
 	                    } else if (turno.equals("Amarillo")){
-                             
-	                        //boton.setEnabled(false);
 	                        Toolkit.getDefaultToolkit().beep();
 	                        ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
 	                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
@@ -244,7 +245,7 @@ public class InterfazJuego extends JFrame {
 						turno=colorXcomputador;
 						
 					} else if (colorXcomputador.equals(turno)){
-						
+                        
 						tablero.realizarMovimiento(fila, columna, computadora);
 						turno=colorXjugador;
 						
@@ -375,12 +376,41 @@ public class InterfazJuego extends JFrame {
             }
             if (accion.getActionCommand().equals("Reiniciar juego")) {
                 JOptionPane.showMessageDialog(null, "Reiniciando todo el tablero...");
-                dispose();
-                InterfazJuego nuevaInterfaz = new InterfazJuego();  
+                //dispose();
+                reiniciarJuego();
+                //InterfazJuego nuevaInterfaz = new InterfazJuego();  
             }
                     
         }
-    }   
+    }  
+    private void reiniciarJuego() {
+        tablero.iniciarTablero();
+        jugador = null;
+        computadora = null;
+        jtNombreJugador.setEditable(true);
+        jbGuardarJugador.setEnabled(true);
+        jcJugadorAmarillo.setEnabled(true);
+        jcJugadorRojo.setEnabled(true);
+        jtAmarilloGanadas.setText("");
+        jtRojoGanadas.setText("");
+        jtTurno.setText("");
+        Component[] components = getContentPane().getComponents();
+        for (Component component : components) {
+            // Verificar si el componente es un botón
+            if (component instanceof JButton) {
+                JButton boton = (JButton) component;
+                // Verificar si el botón es parte del tablero (por ejemplo, si es un botón de las celdas)
+                if (boton.getX() >= 275 && boton.getX() <= 790 && boton.getY() >= 20 && boton.getY() <= 380) {
+                    // Si es un botón del tablero, cambiar su icono a la imagen de ficha vacía
+                    ImageIcon icono = new ImageIcon("Recursos/FichaVacia.png");
+                    Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
+                    boton.setIcon(new ImageIcon(imagen));
+                    boton.setBackground(null);
+                }
+            }
+        }
+    }
+    
 
     // Main temporal
     public static void main(String[] args) {
