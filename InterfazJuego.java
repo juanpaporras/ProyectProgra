@@ -12,7 +12,7 @@ public class InterfazJuego extends JFrame {
     JTextField jtAmarilloGanadas, jtRojoGanadas, jtNombreJugador, jtTurno;
     JLabel jlJugadorAmarillo, jlJugadorRojo, jlRojoGanadas, jlAmarilloGanadas;
     JLabel jlNombreJugador, jlTurno;
-    // ---------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------
 
     // Atributos
     private String verificarJugada, turno2, turno, colorXcomputador="Amarillo", colorXjugador="Rojo";
