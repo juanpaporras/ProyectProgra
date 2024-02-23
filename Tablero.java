@@ -31,7 +31,6 @@ public class Tablero{
 	}
 	//Se vacían todos los espacios al inicio de cada partida
 	//---------------------------------------------------------------------------------------------------
-	
 	//verificar movimiento
 	public boolean verificarMovimiento (int fila, int columna){
 		realizado=false;

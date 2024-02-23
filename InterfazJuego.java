@@ -55,11 +55,6 @@ public class InterfazJuego extends JFrame {
                 add(boton);
             }
         }
-
-
-
-
-
         // ------------------------------------------------------------------------------------------------
         // se crea, la etiqueta de turno y se posiciona.
         jlTurno = new JLabel("Turno del jugador: ");
