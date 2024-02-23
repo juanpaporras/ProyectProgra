@@ -15,12 +15,12 @@ public class InterfazJuego extends JFrame {
     // ---------------------------------------------------------------------------------------------------
 
     // Atributos
-    private String turno1, turno2;
+    private String verificarJugada, turno2, turno, colorXcomputador="Amarillo", colorXjugador="Rojo";
     private String seleccionAmarillo[] = { "Computador", "Persona" };
     private String seleccionRojo[] = { "Persona", "Computador" };
     private int tamanoBoton = 60;
     private int espacioEntreBotones = 5;
-    private boolean turnoJugador1 = true; // Indica si es el turno del jugador 1
+    private boolean turnoJugador1, turnoJugador2; // Indica si es el turno del jugador 1
     // ---------------------------------------------------------------------------------------------------
 
     // Referencias
@@ -52,7 +52,7 @@ public class InterfazJuego extends JFrame {
         }
         // ------------------------------------------------------------------------------------------------
         // se crea, la etiqueta de turno y se posiciona.
-        jlTurno = new JLabel("Turno del juegador: ");
+        jlTurno = new JLabel("Turno del jugador: ");
         jlTurno.setBounds(815, 250, 150, 30);
         add(jlTurno);
         // -----------------------------------------------------------------------------------------------
@@ -64,13 +64,14 @@ public class InterfazJuego extends JFrame {
         // -----------------------------------------------------------------------------------------------
         // Se crea, posiciona y añade el botón de pausa
         jbPause = new JButton("Boton de Pausa");
-        jbPause.setBounds(335, 450, 130, 30);
+        jbPause.setBounds(335, 450, 130, 30); // Establecer el comando del botón
         add(jbPause);
         // -----------------------------------------------------------------------------------------------
 
         // Se crea, posiciona y añade el botón de salir
         jbSalirJogo = new JButton("Salir del juego");
         jbSalirJogo.setBounds(535, 450, 130, 30);
+        jbSalirJogo.setActionCommand("Salir del juego"); // Establecer el comando del botón
         add(jbSalirJogo);
         // -----------------------------------------------------------------------------------------------
 
@@ -164,15 +165,16 @@ public class InterfazJuego extends JFrame {
         tablero = new Tablero();
         ManejadorBoton manejador = new ManejadorBoton();
         ManejadorJugador manejadorJugador = new ManejadorJugador();
+        ManejadorBotones manejadorPause = new ManejadorBotones();
 
         // Definimos la ventana como visible
         setVisible(true);
         // -----------------------------------------------------------------------------------------------
 
         // Se concatena el ActionListener
-        jbReiniciarJuego.addActionListener(manejador);
-        jbPause.addActionListener(manejador);
-        jbSalirJogo.addActionListener(manejador);
+        jbReiniciarJuego.addActionListener(manejadorPause);
+        jbPause.addActionListener(manejadorPause);
+        jbSalirJogo.addActionListener(manejadorPause);
         jbGuardarJugador.addActionListener(manejadorJugador);
         jcJugadorAmarillo.addActionListener(manejadorJugador);
         jcJugadorRojo.addActionListener(manejadorJugador);
@@ -182,88 +184,67 @@ public class InterfazJuego extends JFrame {
     // Manejador de botón
     private class ManejadorBoton implements ActionListener {
         //Atributos
-        private String turnoColor;
-        private int fila, columna, opcion;
-        
-        // Referencias
-        
-        public void actionPerformed(ActionEvent accion) { 
+        private String coordenadas, coordenadasArray [];
+        private int fila, columna;
+        private JButton boton;
+        private Ficha ganador;
 
-            if (accion.getSource()==jbReiniciarJuego) {
-                JOptionPane.showMessageDialog(null, "Reiniciando todo el tablero..."); 
-                dispose();
-                InterfazJuego nuevaInterfaz = new InterfazJuego();
-                
-            }
-	        //-------------------------------------------------------------------------------------------
-	        
-            if (accion.getSource()==jbPause) {
-                opcion= Integer.parseInt(JOptionPane.showInputDialog(
-                        "Menu de Pausa\n1) Volver a el juego\n2) Salir del juego"));
-                switch (opcion) {
-                    case 1:
-                        JOptionPane.showMessageDialog(null, "Volviendo a el juego...");
-                        break;
-                    case 2:
-                        JOptionPane.showMessageDialog(null, "Saliendo....");
-                        dispose();
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(null, "Debe seleccionar una opción válida");
-                        break;
-                }
-            }
-            //-------------------------------------------------------------------------------------------
-            
-            if (accion.getSource()==jbSalirJogo) {
-                JOptionPane.showMessageDialog(null,"me cago en todo");
-                System.exit(0);
-            }
-            //-------------------------------------------------------------------------------------------
+        public void actionPerformed(ActionEvent evento) {
             
             // Si se hace clic en un botón de la cuadrícula
-            JButton boton = (JButton) accion.getSource();
-            String coordenadas = boton.getText();
-            String[] coordenadasArray = coordenadas.split(",");
+            boton= (JButton) evento.getSource();
+            
+            coordenadas= boton.getText();
+            
+            coordenadasArray= coordenadas.split(",");
+            
             fila = Integer.parseInt(coordenadasArray[0].substring(1)); // Obtenemos la fila
-             columna = Integer.parseInt(coordenadasArray[1].substring(0, coordenadasArray[1].length() - 1)); // Obtenemos
-                                                                                                                // la
-                                                                                                                // columna
-            System.out.println(columna);
+            
+            columna = Integer.parseInt(coordenadasArray[1].substring(0, coordenadasArray[1].length() - 1));
+            
             if (jugador != null && computadora != null) {
+                
                 if (coordenadas.startsWith("(")) {
-                    if (turnoJugador1) {
+					
+                    if (turno.equals("Rojo")) {
 						
-						//~ fila=tablero.realizarMovimiento(columna, jugador);
-						//~ for (int i=0; i==6; i++){
-							 //~ boton.setBackground(Color.RED);
-							 //~ Thread.sleep(2000);
-							//~ if (i==fila){
-								 //~ boton.setBackground(Color.RED);
-								 //~ break;
-							//~ }
-						//~ }
-						
-						 boton.setBackground(Color.RED);
-                        jtTurno.setText(turno1);
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
-
-                       
-                    } else {
-                        jtTurno.setText(turno2);
+                        boton.setBackground(Color.RED);
+                        
+                    } else if (turno.equals("Amarillo")){
+						
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
                         boton.setBackground(Color.yellow);
+                        
+                        
+                        
                     }
-                    // Alternar el turno
-                    turnoJugador1 = !turnoJugador1;
-
-                    // Verificar si hay jugada ganadora
-                    // ~ if (){
-
-                    // ~ }
-                }
+                    
+                } 
+                
+                if (colorXjugador.equals(turno)){
+					
+					tablero.realizarMovimiento(fila, columna, jugador);
+					turno=colorXcomputador;
+					
+				} else if (colorXcomputador.equals(turno)){
+					
+					tablero.realizarMovimiento(fila, columna, computadora);
+					turno=colorXjugador;
+					
+				}
+				
+				jtTurno.setText(turno);
+                
+                if (tablero.verificarGanador()!=null){
+					
+					ganador=tablero.verificarGanador();
+					JOptionPane.showMessageDialog(null,"el ganador es: "+ ganador.getNombre());
+					
+				}
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Primero defina los jugadores");
             }
@@ -273,7 +254,7 @@ public class InterfazJuego extends JFrame {
     // Manejador de jugador
     private class ManejadorJugador implements ActionListener {
         // Atributos del manejador
-        public String colorXcomputador = "Amarillo", nombreXjugador, colorXjugador = "Rojo";
+        public String nombreXjugador;
 
         public void actionPerformed(ActionEvent accionJC) {
 
@@ -290,6 +271,7 @@ public class InterfazJuego extends JFrame {
                     jcJugadorRojo.setSelectedItem("Computador");
                     colorXjugador = "Amarillo";
                     colorXcomputador = "Rojo";
+                    
                     
                 }
                 
@@ -322,27 +304,61 @@ public class InterfazJuego extends JFrame {
                     
                 } else {
 					
+					tablero.iniciarTablero();
+					
                     nombreXjugador = jtNombreJugador.getText();
                     
                     jugador = new Ficha(colorXjugador, nombreXjugador);
                     computadora = new Ficha(colorXcomputador, "Computador");
                     
-                    turno1=colorXcomputador;
-                    turno2=colorXjugador;
+                    turno=colorXjugador;
+                    verificarJugada=colorXjugador;
+                    
+                    jtTurno.setText(colorXjugador); 
                     
                     jtNombreJugador.setEditable(false);
                     jbGuardarJugador.setEnabled(false);
+                    jcJugadorAmarillo.setEnabled(false);
+                    jcJugadorRojo.setEnabled(false);
                     
                     JOptionPane.showMessageDialog(null, jugador.getColorFicha() + " || " + jugador.getNombre() + "\n"
                             + computadora.getColorFicha() + " || " + computadora.getNombre());
                             
-                            tablero.iniciarTablero();
                 }
             }
             // -------------------------------------------------------------------------------------------
         }
     }
-    // ---------------------------------------------------------------------------------------------------
+    private class ManejadorBotones implements ActionListener 
+    {
+        public void actionPerformed(ActionEvent accion) {
+            if (accion.getActionCommand().equals("Boton de Pausa")) {
+                int opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
+                        "Menu de Pausa\n1) Volver a el juego\n2) Salir del juego"));
+                switch (opcion) {
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "Volviendo a el juego...");
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Saliendo....");
+                        dispose();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Debe seleccionar una opción válida");
+                        break;
+                }
+            }
+            if (accion.getActionCommand().equals("Salir del juego")) {
+                System.exit(0);
+            }
+            if (accion.getActionCommand().equals("Reiniciar juego")) {
+                JOptionPane.showMessageDialog(null, "Reiniciando todo el tablero...");
+                dispose();
+                InterfazJuego nuevaInterfaz = new InterfazJuego();  
+            }
+                    
+        }
+    }   
 
     // Main temporal
     public static void main(String[] args) {
