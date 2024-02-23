@@ -321,7 +321,7 @@ public class InterfazJuego extends JFrame {
                 dispose();
                 InterfazJuego nuevaInterfaz = new InterfazJuego();  
             }
-                    
+            // -------------------------------------------------------------------------------------------         
         }
     }   
 
