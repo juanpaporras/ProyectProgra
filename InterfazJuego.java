@@ -36,7 +36,6 @@ public class InterfazJuego extends JFrame {
         setLayout(null);
         getContentPane().setBackground(new Color(127, 127, 127));
         // -----------------------------------------------------------------------------------------------
-
         // Cuadrícula 1
         for (int fila = 0; fila < 6; fila++) {
             for (int columna = 0; columna < 7; columna++) {
@@ -47,9 +46,20 @@ public class InterfazJuego extends JFrame {
                 int x = columna * (tamanoBoton + espacioEntreBotones) + 275;
                 int y = fila * (tamanoBoton + espacioEntreBotones) + 20; // Agregar espacio en blanco arriba
                 boton.setBounds(x, y, tamanoBoton, tamanoBoton);
+
+                // Establecer la imagen como icono del botón
+                ImageIcon icono = new ImageIcon("Recursos/FichaVacia.png");
+                Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH); // Ajustar el ancho y el alto al tamaño del botón
+                boton.setIcon(new ImageIcon(imagen));
+
                 add(boton);
             }
         }
+
+
+
+
+
         // ------------------------------------------------------------------------------------------------
         // se crea, la etiqueta de turno y se posiciona.
         jlTurno = new JLabel("Turno del jugador: ");
@@ -207,20 +217,21 @@ public class InterfazJuego extends JFrame {
                 if (coordenadas.startsWith("(")) {
 					
                     if (turno.equals("Rojo")) {
-						
-                        boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
-                        boton.setBackground(Color.RED);
-                        
+                        ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
+                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
+                        boton.setIcon(new ImageIcon(imagen));
+                        boton.setFocusable(false);
                     } else if (turno.equals("Amarillo")){
-						
-                        boton.setEnabled(false);
+                        //boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
+                        ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
+                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
+                        boton.setIcon(new ImageIcon(imagen));
                         boton.setBackground(Color.yellow);
-                        
-                        
-                        
                     }
+                    boton.setEnabled(false);
+                    boton.setBackground(null);
                     
                 } 
                 
