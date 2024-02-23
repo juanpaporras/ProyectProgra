@@ -188,6 +188,7 @@ public class InterfazJuego extends JFrame {
         jbGuardarJugador.addActionListener(manejadorJugador);
         jcJugadorAmarillo.addActionListener(manejadorJugador);
         jcJugadorRojo.addActionListener(manejadorJugador);
+        JOptionPane.showMessageDialog(null,"Hola!");
         // -----------------------------------------------------------------------------------------------
     }
 
@@ -226,10 +227,9 @@ public class InterfazJuego extends JFrame {
 	                        ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
 	                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton+10, tamanoBoton+6, Image.SCALE_SMOOTH);
 	                        boton.setIcon(new ImageIcon(imagen));
-	                        boton.setFocusable(false);
 	                        
 	                    } else if (turno.equals("Amarillo")){
-							
+                             
 	                        //boton.setEnabled(false);
 	                        Toolkit.getDefaultToolkit().beep();
 	                        ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
@@ -239,7 +239,6 @@ public class InterfazJuego extends JFrame {
 	                        
 	                    }
 	                    
-	                    boton.setBackground(null);
 	                    
 	                } 
 	                
@@ -269,7 +268,7 @@ public class InterfazJuego extends JFrame {
 				
 			} else {
 				
-				JOptionPane.showMessageDialog(null, "Jugada no disponible");
+				JOptionPane.showMessageDialog(null, "Jugada no disponible deposite una ficha en las casillas abajo");
 				
 			}
                 
