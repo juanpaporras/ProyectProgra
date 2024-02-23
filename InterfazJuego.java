@@ -184,21 +184,6 @@ public class InterfazJuego extends JFrame {
     // Manejador de botón
     private class ManejadorBoton implements ActionListener {
         //Atributos
-<<<<<<< Updated upstream
-        private String turnoColor;
-
-        
-        // Referencias
-
-        public void actionPerformed(ActionEvent accion) {
-            // Si se hace clic en un botón de la cuadrícula
-            JButton boton = (JButton) accion.getSource();
-            String coordenadas = boton.getText();
-           String[] coordenadasArray = coordenadas.split(",");
-            int fila = Integer.parseInt(coordenadasArray[0].substring(1)); // Obtenemos la fila
-            int columna = Integer.parseInt(coordenadasArray[1].substring(0, coordenadasArray[1].length() - 1)); // Obtenemos   
-            System.out.println(columna);
-=======
         private String coordenadas, coordenadasArray [];
         private int fila, columna;
         private JButton boton;
@@ -217,20 +202,9 @@ public class InterfazJuego extends JFrame {
             
             columna = Integer.parseInt(coordenadasArray[1].substring(0, coordenadasArray[1].length() - 1));
             
->>>>>>> Stashed changes
             if (jugador != null && computadora != null) {
                 
                 if (coordenadas.startsWith("(")) {
-<<<<<<< Updated upstream
-                    if (turnoJugador1) {
-                        jtTurno.setText(turno1);
-                        boton.setEnabled(false);
-                        Toolkit.getDefaultToolkit().beep();
-
-                        boton.setBackground(Color.RED);
-                    } else {
-                        jtTurno.setText(turno2);
-=======
 					
                     if (turno.equals("Rojo")) {
 						
@@ -240,7 +214,6 @@ public class InterfazJuego extends JFrame {
                         
                     } else if (turno.equals("Amarillo")){
 						
->>>>>>> Stashed changes
                         boton.setEnabled(false);
                         Toolkit.getDefaultToolkit().beep();
                         boton.setBackground(Color.yellow);
@@ -248,11 +221,6 @@ public class InterfazJuego extends JFrame {
                         
                         
                     }
-<<<<<<< Updated upstream
-                    // Alternar el turno
-                    turnoJugador1 = !turnoJugador1;
-                }
-=======
                     
                 } 
                 
@@ -277,7 +245,6 @@ public class InterfazJuego extends JFrame {
 					
 				}
                 
->>>>>>> Stashed changes
             } else {
                 JOptionPane.showMessageDialog(null, "Primero defina los jugadores");
             }
@@ -307,7 +274,6 @@ public class InterfazJuego extends JFrame {
                     
                     
                 }
-                jcJugadorAmarillo.setEnabled(false);
                 
             }
             // -------------------------------------------------------------------------------------------
@@ -327,8 +293,6 @@ public class InterfazJuego extends JFrame {
                     colorXjugador = "Amarillo";
                     
                 }
-
-                jcJugadorRojo.setEnabled(false);
             }
             // -------------------------------------------------------------------------------------------
 
@@ -367,13 +331,8 @@ public class InterfazJuego extends JFrame {
     }
     private class ManejadorBotones implements ActionListener 
     {
-<<<<<<< Updated upstream
-        public void actionPerformed(ActionEvent e) {
-            if (e.getActionCommand().equals("Boton de Pausa")) {
-=======
         public void actionPerformed(ActionEvent accion) {
             if (accion.getActionCommand().equals("Boton de Pausa")) {
->>>>>>> Stashed changes
                 int opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
                         "Menu de Pausa\n1) Volver a el juego\n2) Salir del juego"));
                 switch (opcion) {
@@ -389,26 +348,15 @@ public class InterfazJuego extends JFrame {
                         break;
                 }
             }
-<<<<<<< Updated upstream
-            if (e.getActionCommand().equals("Salir del juego")) {
-                System.exit(0);
-            }
-            if (e.getActionCommand().equals("Reiniciar juego")) {
-=======
             if (accion.getActionCommand().equals("Salir del juego")) {
                 System.exit(0);
             }
             if (accion.getActionCommand().equals("Reiniciar juego")) {
->>>>>>> Stashed changes
                 JOptionPane.showMessageDialog(null, "Reiniciando todo el tablero...");
                 dispose();
                 InterfazJuego nuevaInterfaz = new InterfazJuego();  
             }
-<<<<<<< Updated upstream
-            // -------------------------------------------------------------------------------------------         
-=======
                     
->>>>>>> Stashed changes
         }
     }   
 
@@ -417,4 +365,3 @@ public class InterfazJuego extends JFrame {
         InterfazJuego inter = new InterfazJuego();
     }
 }
-  
