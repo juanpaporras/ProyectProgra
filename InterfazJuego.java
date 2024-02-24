@@ -57,7 +57,7 @@ public class InterfazJuego extends JFrame {
                 boton.setBounds(x, y, tamanoBoton, tamanoBoton);
                 // -------------------------------------------------------------------------------------------
 
-                // Establecer la imagen como icono del botón
+                 //Establecer la imagen como icono del botón
                 ImageIcon icono = new ImageIcon("Recursos/FichaVacia.png");
                 Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
                         Image.SCALE_SMOOTH); // Ajustar el ancho y el alto al tamaño del botón
@@ -265,15 +265,16 @@ public class InterfazJuego extends JFrame {
                             Toolkit.getDefaultToolkit().beep();
                             ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
                             Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
-                                    Image.SCALE_SMOOTH);
+                                   Image.SCALE_SMOOTH);
                             boton.setIcon(new ImageIcon(imagen));
+                            boton.setBackground(Color.red);
                             // -------------------------------------------------------------------------------------------
                         } // fin del if turno rojo
                         else if (turno.equals("Amarillo")) {
                             Toolkit.getDefaultToolkit().beep();
                             ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
                             Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
-                                    Image.SCALE_SMOOTH);
+                                   Image.SCALE_SMOOTH);
                             boton.setIcon(new ImageIcon(imagen));
                             boton.setBackground(Color.yellow);
 
@@ -287,23 +288,37 @@ public class InterfazJuego extends JFrame {
 
                         tablero.realizarMovimiento(fila, columna, jugador);
                         turno = colorXcomputador;
-
-                    } // fin del primer if de alternar turno
-                    else if (colorXcomputador.equals(turno)) {
+                        // Establecer el color de fondo del botón
+                        if (colorXjugador=="Rojo") {
                         Random random = new Random();
-                        int a = random.nextInt(7);
+                        int a = random.nextInt(6);
                         int b = random.nextInt(5);
                         String coordsP = "(" + a + "," + b + ")";
                         System.out.println(coordsP);
                         tablero.realizarMovimiento(a, b, computadora);
+                        JButton boton13 = (JButton) getContentPane().getComponentAt(275 + (b * (tamanoBoton + espacioEntreBotones)), 20 + (a * (tamanoBoton + espacioEntreBotones)));
+                        ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
+                            Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
+                                   Image.SCALE_SMOOTH);
+                            boton13.setIcon(new ImageIcon(imagen));
+                        }else
+                        {   
+                        Random random = new Random();
+                        int a = random.nextInt(6);
+                        int b = random.nextInt(5);
+                        String coordsP = "(" + a + "," + b + ")";
+                        System.out.println(coordsP);
+                        tablero.realizarMovimiento(a, b, computadora);
+                        JButton boton13 = (JButton) getContentPane().getComponentAt(275 + (b * (tamanoBoton + espacioEntreBotones)), 20 + (a * (tamanoBoton + espacioEntreBotones)));
+                        ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
+                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
+                                   Image.SCALE_SMOOTH);
+                        boton13.setIcon(new ImageIcon(imagen));
+                        }
                         turno = colorXjugador;
-
-                    } // fin del segundo if de alternar turno
-                      // -------------------------------------------------------------------------------------------
-
+                    } // fin de los 2 turnos
                     // Registra en el TextField el turno siguiente
                     jtTurno.setText(turno);
-
                     // Verifica si hay ganador en linea vertical, libea horizontal y en X
                     if (tablero.verificarGanador() != null) {
 
