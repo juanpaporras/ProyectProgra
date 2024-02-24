@@ -1,21 +1,12 @@
+//Proyecto grupal
+//Juan Pablo Porras Alvarado C36086, Dennis Josue Bustos Soto C31381, Axel Obando Bermudez c25595
 
-// importaciones
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JComponent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Image;
-import java.awt.Graphics;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.io.File;
-import javax.imageio.ImageIO;
-import java.io.IOException;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import java.io.*;
+import javax.imageio.*;
+
 
 // -------------------------------------------------------------------------------------------
 public class MenuGame extends JFrame {
@@ -30,12 +21,16 @@ public class MenuGame extends JFrame {
 
         // parte imagen
         try {
+			
             Image imagen = ImageIO.read(new File("Recursos/Connect4.jpg"));
             Imagenes = new ImagenComponent(imagen);
             Imagenes.setBounds(0, 0, getWidth(), getHeight());
             add(Imagenes);
+            
         } catch (IOException e) {
+			
             e.printStackTrace();
+            
         }
         // -------------------------------------------------------------------------------------------
 
@@ -45,8 +40,8 @@ public class MenuGame extends JFrame {
         btJugar = new JButton("Jugar");
         btSalir = new JButton("Salir");
         // -------------------------------------------------------------------------------------------
+        
         // Establecer posición y tamaño de los botones
-
         btJugar.setBounds(500, 250, 130, 40);
         btSalir.setBounds(500, 320, 130, 40);
         // -------------------------------------------------------------------------------------------
@@ -120,21 +115,31 @@ public class MenuGame extends JFrame {
     // -------------------------------------------------------------------------------------------
 
     private class ManejadorEventoMenu implements ActionListener {
+       
         public void actionPerformed(ActionEvent evento) {
+			
             if (evento.getActionCommand().equals("Salir")) {
+				
                 JOptionPane.showMessageDialog(null, "Saliendo...");
                 System.exit(0);
             }
+            
             if (evento.getActionCommand().equals("Jugar")) {
+				
                 new InterfazJuego();
             }
+            
             if (evento.getActionCommand().equals("Reglas")) {
-                JOptionPane.showMessageDialog(rootPane,
-                        "Necesitas conectar 4 fichas en una linea para poder ganar\n               Intenta evitar los ataques de tu enemigo \n                                        !Suerte!");
-            }
+				
+                JOptionPane.showMessageDialog(null,"Necesitas conectar 4 fichas en una linea vertical, horinzontal o en X para poder ganar");
+                        
+			}
+			
             if (evento.getActionCommand().equals("Creadores")) {
-                JOptionPane.showMessageDialog(rootPane,
-                        "Proyecto Elaborado por:\nJuan Pablo Porras Alvarado C36086 \nAxel Obando Bermudez c25595 \nDennis Josué Bustos Soto C31381\nUniversidad de Costa Rica\nProgramación 1");
+				
+                JOptionPane.showMessageDialog(null,
+                        "Proyecto Elaborado por:\nJuan Pablo Porras Alvarado C36086 \nAxel Obando Bermudez c25595 \nDennis Josue Bustos Soto C31381\nUniversidad de Costa Rica\nProgramación 1");
+                        
             }
         }
     }

@@ -1,10 +1,10 @@
-//Proyecto Grupal
+//Proyecto grupal
+//Juan Pablo Porras Alvarado C36086, Dennis Josue Bustos Soto C31381, Axel Obando Bermudez c25595
 
 public class Tablero {
 
 	// Atributos
-	private boolean realizado;
-	private boolean infoJugada;
+	private boolean realizado, infoJugada;
 	private int posicion;
 	// ---------------------------------------------------------------------------------------------------
 	// Referencias
@@ -72,7 +72,7 @@ public class Tablero {
 					if (ganadorEnColumna(fila, columna) == true || ganadorFila(fila, columna) == true
 							|| ganadorVerticalDerechaIzquierda(fila, columna) == true
 							|| ganadorVerticalIzquierdaDerecha(fila, columna) == true) {
-
+						
 						return tablero[fila][columna];
 
 					}
@@ -95,7 +95,7 @@ public class Tablero {
 							&& tablero[fila][(columna - 2)].getColorFicha().equals("Amarillo")) {
 						if (tablero[fila][(columna - 3)] != null
 								&& tablero[fila][(columna - 3)].getColorFicha().equals("Amarillo")) {
-
+							
 							return realizado = true;
 
 						}
@@ -109,7 +109,7 @@ public class Tablero {
 							&& tablero[fila][(columna - 2)].getColorFicha().equals("Rojo")) {
 						if (tablero[fila][(columna - 3)] != null
 								&& tablero[fila][(columna - 3)].getColorFicha().equals("Rojo")) {
-
+							
 							return realizado = true;
 
 						}
@@ -134,7 +134,7 @@ public class Tablero {
 							&& tablero[(fila - 2)][(columna)].getColorFicha().equals("Amarillo")) {
 						if (tablero[(fila - 3)][(columna)] != null
 								&& tablero[(fila - 3)][(columna)].getColorFicha().equals("Amarillo")) {
-
+							
 							return realizado = true;
 
 						}
@@ -148,7 +148,7 @@ public class Tablero {
 							&& tablero[(fila - 2)][(columna)].getColorFicha().equals("Rojo")) {
 						if (tablero[(fila - 3)][(columna)] != null
 								&& tablero[(fila - 3)][(columna)].getColorFicha().equals("Rojo")) {
-
+							
 							return realizado = true;
 
 						}
@@ -173,7 +173,7 @@ public class Tablero {
 							&& tablero[(fila - 2)][(columna - 2)].getColorFicha().equals("Amarillo")) {
 						if (tablero[(fila - 3)][(columna - 3)] != null
 								&& tablero[(fila - 3)][(columna - 3)].getColorFicha().equals("Amarillo")) {
-
+							
 							return realizado = true;
 
 						}
@@ -187,7 +187,7 @@ public class Tablero {
 							&& tablero[(fila - 2)][(columna - 2)].getColorFicha().equals("Rojo")) {
 						if (tablero[(fila - 3)][(columna - 3)] != null
 								&& tablero[(fila - 3)][(columna - 3)].getColorFicha().equals("Rojo")) {
-
+							
 							return realizado = true;
 
 						}
@@ -210,7 +210,7 @@ public class Tablero {
 							&& tablero[(fila - 2)][(columna + 2)].getColorFicha().equals("Amarillo")) {
 						if (tablero[(fila - 3)][(columna + 3)] != null
 								&& tablero[(fila - 3)][(columna + 3)].getColorFicha().equals("Amarillo")) {
-
+							
 							return realizado = true;
 
 						}
@@ -224,7 +224,7 @@ public class Tablero {
 							&& tablero[(fila - 2)][(columna + 2)].getColorFicha().equals("Rojo")) {
 						if (tablero[(fila - 3)][(columna + 3)] != null
 								&& tablero[(fila - 3)][(columna + 3)].getColorFicha().equals("Rojo")) {
-
+							
 							return realizado = true;
 
 						}

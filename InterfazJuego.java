@@ -1,3 +1,5 @@
+//Proyecto grupal
+//Juan Pablo Porras Alvarado C36086, Dennis Josue Bustos Soto C31381, Axel Obando Bermudez c25595
 
 //Importaciones 
 import javax.swing.*;
@@ -12,19 +14,17 @@ public class InterfazJuego extends JFrame {
     // demas.
     JButton jbPause, jbSalirJogo, jbGuardarJugador, jbReiniciarJuego;
     JComboBox jcJugadorAmarillo, jcJugadorRojo;
-    JTextField jtAmarilloGanadas, jtRojoGanadas, jtNombreJugador, jtTurno;
+    JTextField jtAmarilloGanadas, jtRojoGanadas, jtNombreJugador, jtInfoImportante;
     JLabel jlJugadorAmarillo, jlJugadorRojo, jlRojoGanadas, jlAmarilloGanadas;
-    JLabel jlNombreJugador, jlTurno, jlInfor;
+    JLabel jlNombreJugador;
 
     // ---------------------------------------------------------------------------------------------------
 
     // Atributos
-    private String verificarJugada, turno2, turno, colorXcomputador = "Amarillo", colorXjugador = "Rojo";
+    private String turno, colorXcomputador = "Amarillo", colorXjugador = "Rojo";
     private String seleccionAmarillo[] = { "Computador", "Persona" };
     private String seleccionRojo[] = { "Persona", "Computador" };
-    private int tamanoBoton = 60;
-    private int espacioEntreBotones = 5;
-    private boolean turnoJugador1, turnoJugador2; // Indica si es el turno del jugador 1
+    private int tamanoBoton = 60, espacioEntreBotones = 5, marcadorAmarillo=0, marcadorRojo=0;
 
     // ---------------------------------------------------------------------------------------------------
 
@@ -66,19 +66,6 @@ public class InterfazJuego extends JFrame {
                 add(boton);
             } // fin del segundo for
         } // fin del primer for
-          // ------------------------------------------------------------------------------------------------
-          // se crea, la etiqueta de turno y se posiciona.
-        jlTurno = new JLabel("Turno del jugador: ");
-        jlTurno.setBounds(815, 250, 150, 30);
-        add(jlTurno);
-
-        // -----------------------------------------------------------------------------------------------
-
-        // se crea , el campo de texto para jTTurno.
-        jtTurno = new JTextField(20);
-        jtTurno.setEditable(false);
-        jtTurno.setBounds(795, 280, 150, 40);
-        add(jtTurno);
 
         // -----------------------------------------------------------------------------------------------
 
@@ -119,10 +106,13 @@ public class InterfazJuego extends JFrame {
         add(jlJugadorAmarillo);
 
         // -----------------------------------------------------------------------------------------------
-        // Se crea y posiciona y añade el Jlabel "Informacion"
-        jlInfor = new JLabel("Informacion importante");
-        jlInfor.setBounds(800, 330, 3000, 30);
-        add(jlInfor);
+        
+        // Se crea y posiciona y añade el jtInfoImportante "Informacion"
+        jtInfoImportante = new JTextField (50);
+        jtInfoImportante.setBounds(350, 490, 300, 30);
+        add(jtInfoImportante);
+        jtInfoImportante.setText("Recuerda rellenar las columnas de abajo hacia arriba");
+        jtInfoImportante.setEditable(false);
 
         // -----------------------------------------------------------------------------------------------
         // Se crea, posiciona y añade el JLabel "Partidas Ganadas"
@@ -135,7 +125,9 @@ public class InterfazJuego extends JFrame {
         // Se crea, posiciona y añade el JTextField "Jugadas Ganadas computadoras"
         jtAmarilloGanadas = new JTextField(20);
         jtAmarilloGanadas.setBounds(30, 150, 150, 60);
+        jtAmarilloGanadas.setHorizontalAlignment(SwingConstants.CENTER); 
         add(jtAmarilloGanadas);
+        jtAmarilloGanadas.setText(String.valueOf(marcadorAmarillo));
         jtAmarilloGanadas.setEditable(false);
 
         // -----------------------------------------------------------------------------------------------
@@ -154,10 +146,12 @@ public class InterfazJuego extends JFrame {
 
         // -----------------------------------------------------------------------------------------------
 
-        // Se crea, posiciona y añade el JTextField "Jugadas Ganadas jugador"
+        // Se crea, posiciona y añade el JTextField "Jugadas Ganadas rojo"
         jtRojoGanadas = new JTextField(20);
         jtRojoGanadas.setBounds(30, 320, 150, 60);
         add(jtRojoGanadas);
+        jtRojoGanadas.setHorizontalAlignment(SwingConstants.CENTER);
+        jtRojoGanadas.setText(String.valueOf(marcadorRojo));
         jtRojoGanadas.setEditable(false);
 
         // -----------------------------------------------------------------------------------------------
@@ -223,9 +217,6 @@ public class InterfazJuego extends JFrame {
         jbGuardarJugador.addActionListener(manejadorJugador);
         jcJugadorAmarillo.addActionListener(manejadorJugador);
         jcJugadorRojo.addActionListener(manejadorJugador);
-        JOptionPane.showMessageDialog(null,
-                "Hola! Bienvenido a conecta 4 \nEste es un tablero con gravedad por lo cual debes\ndepositar fichas en lugares donde haya una por debajo");
-
         // -----------------------------------------------------------------------------------------------
     }
 
@@ -262,21 +253,22 @@ public class InterfazJuego extends JFrame {
                     if (coordenadas.startsWith("(")) {
 
                         if (turno.equals("Rojo")) {
+							
                             Toolkit.getDefaultToolkit().beep();
                             ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
                             Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
                                    Image.SCALE_SMOOTH);
                             boton.setIcon(new ImageIcon(imagen));
-                            boton.setBackground(Color.red);
+
                             // -------------------------------------------------------------------------------------------
                         } // fin del if turno rojo
                         else if (turno.equals("Amarillo")) {
+							
                             Toolkit.getDefaultToolkit().beep();
                             ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
                             Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
                                    Image.SCALE_SMOOTH);
                             boton.setIcon(new ImageIcon(imagen));
-                            boton.setBackground(Color.yellow);
 
                         } // fin del if turno amarillo
 
@@ -288,65 +280,64 @@ public class InterfazJuego extends JFrame {
 
                         tablero.realizarMovimiento(fila, columna, jugador);
                         turno = colorXcomputador;
-                        // Establecer el color de fondo del botón
-                        if (colorXjugador=="Rojo") {
-                        Random random = new Random();
-                        int a = random.nextInt(6);
-                        int b = random.nextInt(5);
-                        String coordsP = "(" + a + "," + b + ")";
-                        System.out.println(coordsP);
-                        tablero.realizarMovimiento(a, b, computadora);
-                        JButton boton13 = (JButton) getContentPane().getComponentAt(275 + (b * (tamanoBoton + espacioEntreBotones)), 20 + (a * (tamanoBoton + espacioEntreBotones)));
-                        ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
-                            Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
-                                   Image.SCALE_SMOOTH);
-                            boton13.setIcon(new ImageIcon(imagen));
-                        }else
-                        {   
-                        Random random = new Random();
-                        int a = random.nextInt(6);
-                        int b = random.nextInt(5);
-                        String coordsP = "(" + a + "," + b + ")";
-                        System.out.println(coordsP);
-                        tablero.realizarMovimiento(a, b, computadora);
-                        JButton boton13 = (JButton) getContentPane().getComponentAt(275 + (b * (tamanoBoton + espacioEntreBotones)), 20 + (a * (tamanoBoton + espacioEntreBotones)));
-                        ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
-                        Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
-                                   Image.SCALE_SMOOTH);
-                        boton13.setIcon(new ImageIcon(imagen));
-                        }
-                        turno = colorXjugador;
-                    } // fin de los 2 turnos
+                        
+                        
+                        jugadaComputadora();
+                        
+
+					}
+                    
                     // Registra en el TextField el turno siguiente
-                    jtTurno.setText(turno);
+                    
                     // Verifica si hay ganador en linea vertical, libea horizontal y en X
                     if (tablero.verificarGanador() != null) {
 
                         ganador = tablero.verificarGanador();
                         JOptionPane.showMessageDialog(null, "el ganador es: " + ganador.getNombre());
-
+                        
+                        if (ganador.getColorFicha().equals("Amarillo")){
+							
+							marcadorAmarillo++;
+							jtAmarilloGanadas.setText(String.valueOf(marcadorAmarillo));
+							
+						} else if (ganador.getColorFicha().equals("Rojo")){
+							
+							marcadorRojo++;
+							jtRojoGanadas.setText(String.valueOf(marcadorRojo));
+							
+						}
+						
                     } // fin del if
 
                 } // fin del if verificar movimiento
 
                 // -------------------------------------------------------------------------------------------
+                
                 else {
 
                     JOptionPane.showMessageDialog(null,
-                            "Jugada no disponible deposite una ficha en las casillas abajo");
+                            "Jugada no disponible");
 
                 } // fin del else
-                  // -------------------------------------------------------------------------------------------
+                
+			  // -------------------------------------------------------------------------------------------
+			  
             } // fin del if para verificar la creacion de los objetos
+            
             else {
+				
                 JOptionPane.showMessageDialog(null, "Primero defina los jugadores");
+                
             } // fin del else
+            
         }// fin del public void ActionPerformed
+        
     }// fin de la clase privada manejadorBoton
      // -----------------------------------------------------------------------------------------------------------------------------------------------
 
     // Manejador de jugador
     private class ManejadorJugador implements ActionListener {
+		
         // Atributos del manejador
         public String nombreXjugador;
 
@@ -388,6 +379,7 @@ public class InterfazJuego extends JFrame {
                     colorXjugador = "Amarillo";
 
                 } // fin del if jcJugadorRojo(Computador)
+                
             } // fin del if jcJugadorRojo
               // -------------------------------------------------------------------------------------------
 
@@ -407,9 +399,6 @@ public class InterfazJuego extends JFrame {
                     computadora = new Ficha(colorXcomputador, "Computador");
 
                     turno = colorXjugador;
-                    verificarJugada = colorXjugador;
-
-                    jtTurno.setText(colorXjugador);
 
                     jtNombreJugador.setEditable(false);
                     jbGuardarJugador.setEnabled(false);
@@ -423,38 +412,58 @@ public class InterfazJuego extends JFrame {
             }
 
         }// fin del public void actionPerformed (accionJC)
+        
     }// fin del private class ManejadorJugador
      // -----------------------------------------------------------------------------------------------------------------------------------------
 
     private class ManejadorBotones implements ActionListener {
+		private int opcion;
         public void actionPerformed(ActionEvent accion) {
+			
             if (accion.getActionCommand().equals("Boton de Pausa")) {
-                int opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
+				
+                opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
                         "Menu de Pausa\n1) Volver a el juego\n2) Salir del juego"));
+                        
                 switch (opcion) {
+					
                     case 1:
+                    
                         JOptionPane.showMessageDialog(null, "Volviendo a el juego...");
                         break;
+                        
                     case 2:
+                    
                         JOptionPane.showMessageDialog(null, "Saliendo....");
                         dispose();
                         break;
+                        
                     default:
+                    
                         JOptionPane.showMessageDialog(null, "Debe seleccionar una opción válida");
                         break;
+                        
                 }
+                
             }
+            
             if (accion.getActionCommand().equals("Salir del juego")) {
+				
+                JOptionPane.showMessageDialog(null, "-----------------CREDITOS-----------------"+
+                "\nJuan Pablo Porras Alvarado C36086 \nDennis Josue Bustos Soto C31381 \nAxel Obando Bermudez c25595");
                 System.exit(0);
+                
             }
+            
             if (accion.getActionCommand().equals("Reiniciar juego")) {
+				
                 JOptionPane.showMessageDialog(null, "Reiniciando todo el tablero...");
-                // dispose();
                 reiniciarJuego();
-                // InterfazJuego nuevaInterfaz = new InterfazJuego();
+                
             }
 
         }
+        
     }
 
     // ------------------------------------------------------------------------------------------------------------------------------------
@@ -463,37 +472,76 @@ public class InterfazJuego extends JFrame {
         tablero.iniciarTablero();
         jugador = null;
         computadora = null;
+        jtAmarilloGanadas.setText(String.valueOf(marcadorAmarillo));
+        jtRojoGanadas.setText(String.valueOf(marcadorRojo));
         jtNombreJugador.setEditable(true);
         jbGuardarJugador.setEnabled(true);
         jcJugadorAmarillo.setEnabled(true);
         jcJugadorRojo.setEnabled(true);
-        jtAmarilloGanadas.setText("");
-        jtRojoGanadas.setText("");
-        jtTurno.setText("");
         // -------------------------------------------------------------------------------------------
 
         Component[] components = getContentPane().getComponents();
+        
         for (Component component : components) {
+			
             // Verificar si el componente es un botón
             if (component instanceof JButton) {
+				
                 JButton boton = (JButton) component;
                 // Verificar si el botón es parte del tablero (por ejemplo, si es un botón de
                 // las celdas)
+                
                 if (boton.getX() >= 275 && boton.getX() <= 790 && boton.getY() >= 20 && boton.getY() <= 380) {
+					
                     // Si es un botón del tablero, cambiar su icono a la imagen de ficha vacía
                     ImageIcon icono = new ImageIcon("Recursos/FichaVacia.png");
                     Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
                             Image.SCALE_SMOOTH);
                     boton.setIcon(new ImageIcon(imagen));
                     boton.setBackground(null);
+                    
                 }
             }
         }
     }
     // ---------------------------------------------------------------------------------------------------------------------------------------------
-
-    // Main temporal 
-    // public static void main(String[] args) {
-    // InterfazJuego inter = new InterfazJuego();
-    // }
+	
+	//Jugada computadora
+	private void jugadaComputadora (){
+		int a, b;
+		String coordsP;
+		
+		//Do-While para generar coordenadas hasta que la jugada sea legal
+		do {
+			
+			Random random = new Random();
+			a = random.nextInt(6);
+			b = random.nextInt(7);
+			coordsP = "(" + a + "," + b + ")";
+		
+		} while (tablero.verificarMovimiento(a, b)!=true);
+		
+		JButton boton13 = (JButton) getContentPane().getComponentAt(275 + (b * (tamanoBoton + espacioEntreBotones)), 20 + (a * (tamanoBoton + espacioEntreBotones)));
+		
+		if (colorXjugador.equals("Rojo")) {
+			
+			ImageIcon icono = new ImageIcon("Recursos/FichaAmarilla.png");
+			Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
+				Image.SCALE_SMOOTH);
+			boton13.setIcon(new ImageIcon(imagen));
+			
+		} else {   
+			
+			ImageIcon icono = new ImageIcon("Recursos/FichaRojo.png");
+			Image imagen = icono.getImage().getScaledInstance(tamanoBoton + 10, tamanoBoton + 6,
+					   Image.SCALE_SMOOTH);
+			boton13.setIcon(new ImageIcon(imagen));
+			
+		}
+		
+		tablero.realizarMovimiento(a, b, computadora);
+		turno = colorXjugador;
+		
+	}
+	
 }
