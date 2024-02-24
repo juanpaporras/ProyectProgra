@@ -290,8 +290,12 @@ public class InterfazJuego extends JFrame {
 
                     } // fin del primer if de alternar turno
                     else if (colorXcomputador.equals(turno)) {
-
-                        tablero.realizarMovimiento(fila, columna, computadora);
+                        Random random = new Random();
+                        int a = random.nextInt(7);
+                        int b = random.nextInt(5);
+                        String coordsP = "(" + a + "," + b + ")";
+                        System.out.println(coordsP);
+                        tablero.realizarMovimiento(a, b, computadora);
                         turno = colorXjugador;
 
                     } // fin del segundo if de alternar turno
