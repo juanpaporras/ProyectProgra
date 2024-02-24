@@ -1,86 +1,123 @@
-//Proyecto Grupal
 
-import javax.swing.ImageIcon;
+// importaciones
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JMenuBar; 
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
+import javax.swing.JComponent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Image;
+import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
+// -------------------------------------------------------------------------------------------
 public class MenuGame extends JFrame {
 
-    
+    private ImagenComponent Imagenes;
 
-    private JLabel label;
     public MenuGame() {
+        setLayout(null);
         setTitle("Menú del Juego");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
 
-        // parte imagen 
-        label = new JLabel();
-        adaptarTamanioImagen("Recursos/Connect4.jpg");
-        add(label);
+        // parte imagen
+        try {
+            Image imagen = ImageIO.read(new File("Recursos/Connect4.jpg"));
+            Imagenes = new ImagenComponent(imagen);
+            Imagenes.setBounds(0, 0, getWidth(), getHeight());
+            add(Imagenes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // -------------------------------------------------------------------------------------------
 
-        JMenu menuSalir;
+        JButton btJugar, btSalir;
+
+        // Crear botones
+        btJugar = new JButton("Jugar");
+        btSalir = new JButton("Salir");
+        // -------------------------------------------------------------------------------------------
+        // Establecer posición y tamaño de los botones
+
+        btJugar.setBounds(500, 250, 130, 40);
+        btSalir.setBounds(500, 320, 130, 40);
+        // -------------------------------------------------------------------------------------------
+
+        // Agregar botones a la ventana
+        add(btJugar);
+        add(btSalir);
+        // -------------------------------------------------------------------------------------------
+
         JMenu menuJuego;
         JMenu menuAcercaDe;
+        // -------------------------------------------------------------------------------------------
 
-        JMenuItem subMenuSalir;
         JMenuItem subMenuEmpezarJuego;
-        JMenuItem subMenuReglas;
-        JMenuItem subMenuMusica;
         JMenuItem subMenuAcerca;
+        // -------------------------------------------------------------------------------------------
 
-        menuSalir = new JMenu("Salir");
-        menuJuego = new JMenu("Reglas Y Juego");
-        menuAcercaDe=new JMenu("Acerca de");
+        menuJuego = new JMenu("Reglas");
+        menuAcercaDe = new JMenu("Acerca de");
+        // -------------------------------------------------------------------------------------------
 
-        subMenuSalir = new JMenuItem("Salir");
         subMenuEmpezarJuego = new JMenuItem("Reglas");
-        subMenuReglas = new JMenuItem("Juego");
-        subMenuMusica = new JMenuItem("Reproducir Música");
         subMenuAcerca = new JMenuItem("Creadores");
+        // -------------------------------------------------------------------------------------------
 
-        menuSalir.add(subMenuSalir);
         menuJuego.add(subMenuEmpezarJuego);
-        menuJuego.add(subMenuReglas);
-        menuJuego.add(subMenuMusica);
         menuAcercaDe.add(subMenuAcerca);
+        // -------------------------------------------------------------------------------------------
 
         JMenuBar barra = new JMenuBar();
         setJMenuBar(barra);
-        barra.add(menuSalir);
         barra.add(menuJuego);
         barra.add(menuAcercaDe);
+        // -------------------------------------------------------------------------------------------
 
         ManejadorEventoMenu manejadorEventoMenu = new ManejadorEventoMenu();
-        subMenuSalir.addActionListener(manejadorEventoMenu);
+
         subMenuEmpezarJuego.addActionListener(manejadorEventoMenu);
-        subMenuReglas.addActionListener(manejadorEventoMenu);
-        subMenuMusica.addActionListener(manejadorEventoMenu);
         subMenuAcerca.addActionListener(manejadorEventoMenu);
+        btJugar.addActionListener(manejadorEventoMenu);
+        btSalir.addActionListener(manejadorEventoMenu);
+        // -------------------------------------------------------------------------------------------
 
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                adaptarTamanioImagen("Recursos/Connect4.jpg");
+                Imagenes.setBounds(0, 0, getWidth(), getHeight());
             }
         });
         setVisible(true);
+        repaint();
     }
+    // -------------------------------------------------------------------------------------------
 
-    private void adaptarTamanioImagen(String ruta) {
-        int anchoVentana = getWidth();
-        int altoVentana = getHeight();
-        ImageIcon icono = new ImageIcon(ruta);
-        Image imagen = icono.getImage().getScaledInstance(anchoVentana, altoVentana, Image.SCALE_SMOOTH);
-        label.setIcon(new ImageIcon(imagen));
+    // clase privada para manejar y almacenar la imagen
+    private class ImagenComponent extends JComponent {
+        private Image imagen;
+
+        public ImagenComponent(Image imagen) {
+            this.imagen = imagen;
+        }
+
+        // -------------------------------------------------------------------------------------------
+
+        // En este método, se dibuja la imagen en el componente.
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(imagen, 0, 0, this.getWidth(), this.getHeight(), this);
+            // Esto asegura que la imagen se ajuste al tamaño del componente.
+        }
     }
+    // -------------------------------------------------------------------------------------------
 
     private class ManejadorEventoMenu implements ActionListener {
         public void actionPerformed(ActionEvent evento) {
@@ -88,17 +125,21 @@ public class MenuGame extends JFrame {
                 JOptionPane.showMessageDialog(null, "Saliendo...");
                 System.exit(0);
             }
-            if (evento.getActionCommand().equals("Juego")) {
-                  new InterfazJuego();
+            if (evento.getActionCommand().equals("Jugar")) {
+                new InterfazJuego();
             }
             if (evento.getActionCommand().equals("Reglas")) {
-                JOptionPane.showMessageDialog(rootPane, "Necesitas conectar 4 fichas en una linea para poder ganar\n               Intenta evitar los ataques de tu enemigo \n                                        !Suerte!");
+                JOptionPane.showMessageDialog(rootPane,
+                        "Necesitas conectar 4 fichas en una linea para poder ganar\n               Intenta evitar los ataques de tu enemigo \n                                        !Suerte!");
             }
             if (evento.getActionCommand().equals("Creadores")) {
-                JOptionPane.showMessageDialog(rootPane, "Proyecto Elaborado por:\nJuan Pablo Porras Alvarado C36086 \nAxel Obando Bermudez c25595\nUniversidad de Costa Rica\nProgramación 1");
+                JOptionPane.showMessageDialog(rootPane,
+                        "Proyecto Elaborado por:\nJuan Pablo Porras Alvarado C36086 \nAxel Obando Bermudez c25595 \nDennis Josué Bustos Soto C31381\nUniversidad de Costa Rica\nProgramación 1");
             }
         }
     }
+
+    // -------------------------------------------------------------------------------------------
     public static void main(String arg[]) {
         new MenuGame();
     }
