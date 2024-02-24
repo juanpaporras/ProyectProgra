@@ -473,7 +473,7 @@ public class InterfazJuego extends JFrame {
     }
     // ---------------------------------------------------------------------------------------------------------------------------------------------
 
-    // Main temporal
+    // Main temporal 
     // public static void main(String[] args) {
     // InterfazJuego inter = new InterfazJuego();
     // }
