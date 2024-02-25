@@ -1,6 +1,6 @@
 //Proyecto grupal
 
-public class Ficha {
+public class Ficha { 
 
 	//Atributos
 	private String color;

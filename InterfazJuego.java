@@ -284,30 +284,28 @@ public class InterfazJuego extends JFrame {
                         
                         jugadaComputadora();
                         
+                         ganador = tablero.verificarGanadorRecursivo(0, 0);
+                         
+                         if (ganador!=null){
+							 
+							 JOptionPane.showMessageDialog(null, "el ganador es: " + ganador.getNombre());
+							 
+								if (ganador.getColorFicha().equals("Amarillo")){
+									
+									marcadorAmarillo++;
+									jtAmarilloGanadas.setText(String.valueOf(marcadorAmarillo));
+									
+								} else if (ganador.getColorFicha().equals("Rojo")){
+									
+									marcadorRojo++;
+									jtRojoGanadas.setText(String.valueOf(marcadorRojo));
+									
+								}
+							 
+							 
+						 }
 
 					}
-                    
-                    // Registra en el TextField el turno siguiente
-                    
-                    // Verifica si hay ganador en linea vertical, libea horizontal y en X
-                    if (tablero.verificarGanador() != null) {
-
-                        ganador = tablero.verificarGanador();
-                        JOptionPane.showMessageDialog(null, "el ganador es: " + ganador.getNombre());
-                        
-                        if (ganador.getColorFicha().equals("Amarillo")){
-							
-							marcadorAmarillo++;
-							jtAmarilloGanadas.setText(String.valueOf(marcadorAmarillo));
-							
-						} else if (ganador.getColorFicha().equals("Rojo")){
-							
-							marcadorRojo++;
-							jtRojoGanadas.setText(String.valueOf(marcadorRojo));
-							
-						}
-						
-                    } // fin del if
 
                 } // fin del if verificar movimiento
 

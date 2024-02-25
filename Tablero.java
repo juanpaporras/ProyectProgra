@@ -65,44 +65,27 @@ public class Tablero{
 	//---------------------------------------------------------------------------------------------------
 	
 	//Metodo verificar un ganador
-	public void verificarGanador (int fila, int columna){
-		ganador=false;
-		
-		if (fila < 6 && columna <7){
-			if (tablero[fila][columna]!=null){
-				if (ganadorEnColumna(fila, columna)==true || ganadorFila(fila, columna)==true || ganadorVerticalDerechaIzquierda(fila, columna)==true || ganadorVerticalIzquierdaDerecha(fila, columna)==true){  
-						
-					ganador=true;
-					fichaGanadora(fila, columna);
-														
-				}
-			}
-			
-			columna++;
-			
-			if (columna==6){
-				
-				fila++;
-				
-			}
-		}	
-			
-		
-		verificarGanador(fila, columna);
-	}
-	//---------------------------------------------------------------------------------------------------
+	public Ficha verificarGanadorRecursivo(int fila, int columna) {
+	    if (fila < 6 && columna < 7) {
+	        if (tablero[fila][columna] != null) {
+	            if (ganadorEnColumna(fila, columna) || ganadorFila(fila, columna) ||
+	                ganadorVerticalDerechaIzquierda(fila, columna) || ganadorVerticalIzquierdaDerecha(fila, columna)) {
+	                return tablero[fila][columna];
+	            }
+	        }
 	
-	public Ficha fichaGanadora (int fila, int columna){
-		
-		
-		if (ganador==true){
-			
-			return tablero[fila][columna];
-			
-		}
-		
-		return null;
+	        // Llamada recursiva para moverse a la siguiente posición en el tablero
+	        if (columna == 6) {
+	            return verificarGanadorRecursivo(fila + 1, 0);
+	        } else {
+	            return verificarGanadorRecursivo(fila, columna + 1);
+	        }
+	    }
+	
+	    return null;
 	}
+
+	//---------------------------------------------------------------------------------------------------
 	
 	//Metodo ganador en linea horizontal
 	private boolean ganadorEnColumna (int fila, int columna){
