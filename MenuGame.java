@@ -34,18 +34,18 @@ public class MenuGame extends JFrame {
 		setSize(800, 600);
 
 		// Parte de la imagen
-		try { // Inicio del bloque try
+		// try { // Inicio del bloque try
 			
-			Image imagen = ImageIO.read(new File("Recursos/Connect4.jpg"));
-			Imagenes = new ImagenComponent(imagen);
-			Imagenes.setBounds(0, 0, getWidth(), getHeight());
-			add(Imagenes);
+		// 	Image imagen = ImageIO.read(new File("Recursos/Connect4.jpg"));
+		// 	Imagenes = new ImagenComponent(imagen);
+		// 	Imagenes.setBounds(0, 0, getWidth(), getHeight());
+		// 	add(Imagenes);
 			
-		} catch (IOException e) { // Inicio del bloque catch
+		// } catch (IOException e) { // Inicio del bloque catch
 			
-			e.printStackTrace();
+		// 	e.printStackTrace();
 			
-		} // Fin del bloque catch
+		// } // Fin del bloque catch
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         JButton btJugar, btSalir;
@@ -106,6 +106,9 @@ public class MenuGame extends JFrame {
         });
         setVisible(true);
         repaint();
+		revalidate();
+		setLayout(null);
+		repaint();
     
     	} // Fin del constructor MenuGame
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
