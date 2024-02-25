@@ -33,19 +33,7 @@ public class MenuGame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
 
-		// Parte de la imagen
-		// try { // Inicio del bloque try
-			
-		// 	Image imagen = ImageIO.read(new File("Recursos/Connect4.jpg"));
-		// 	Imagenes = new ImagenComponent(imagen);
-		// 	Imagenes.setBounds(0, 0, getWidth(), getHeight());
-		// 	add(Imagenes);
-			
-		// } catch (IOException e) { // Inicio del bloque catch
-			
-		// 	e.printStackTrace();
-			
-		// } // Fin del bloque catch
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         JButton btJugar, btSalir;
@@ -63,7 +51,19 @@ public class MenuGame extends JFrame {
         // Agregar botones a la ventana
         add(btJugar);
         add(btSalir);
-        
+        		// Parte de la imagen
+		try { // Inicio del bloque try
+			
+			Image imagen = ImageIO.read(new File("Recursos/Connect4.jpg"));
+			Imagenes = new ImagenComponent(imagen);
+			Imagenes.setBounds(0, 0, getWidth(), getHeight());
+			add(Imagenes);
+			
+		} catch (IOException e) { // Inicio del bloque catch
+			
+			e.printStackTrace();
+			
+		} // Fin del bloque catch
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         JMenu menuJuego;
         JMenu menuAcercaDe;
