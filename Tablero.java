@@ -3,7 +3,7 @@
 public class Tablero{
 	
 	//Atributos 
-	private boolean realizado;
+	private boolean realizado, ganador;
 	private boolean infoJugada;
 	private int posicion;
     //---------------------------------------------------------------------------------------------------
@@ -65,22 +65,44 @@ public class Tablero{
 	//---------------------------------------------------------------------------------------------------
 	
 	//Metodo verificar un ganador
-	public Ficha verificarGanador (){
+	public void verificarGanador (int fila, int columna){
+		ganador=false;
 		
-		for (int fila=5; fila>=0; fila--){
-			for (int columna=6; columna>=0; columna--){
-				if (tablero[fila][columna]!=null){
-					if (ganadorEnColumna(fila, columna)==true || ganadorFila(fila, columna)==true || ganadorVerticalDerechaIzquierda(fila, columna)==true || ganadorVerticalIzquierdaDerecha(fila, columna)==true){  
+		if (fila < 6 && columna <7){
+			if (tablero[fila][columna]!=null){
+				if (ganadorEnColumna(fila, columna)==true || ganadorFila(fila, columna)==true || ganadorVerticalDerechaIzquierda(fila, columna)==true || ganadorVerticalIzquierdaDerecha(fila, columna)==true){  
 						
-						return tablero[fila][columna];
-						
-					}
+					ganador=true;
+					fichaGanadora(fila, columna);
+														
 				}
 			}
-		}
-		return null;
+			
+			columna++;
+			
+			if (columna==6){
+				
+				fila++;
+				
+			}
+		}	
+			
+		
+		verificarGanador(fila, columna);
 	}
 	//---------------------------------------------------------------------------------------------------
+	
+	public Ficha fichaGanadora (int fila, int columna){
+		
+		
+		if (ganador==true){
+			
+			return tablero[fila][columna];
+			
+		}
+		
+		return null;
+	}
 	
 	//Metodo ganador en linea horizontal
 	private boolean ganadorEnColumna (int fila, int columna){
