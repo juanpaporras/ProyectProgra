@@ -1,7 +1,7 @@
 //Proyecto grupal
 //Juan Pablo Porras Alvarado C36086, Dennis Josue Bustos Soto C31381, Axel Obando Bermudez c25595
 
-public class Ficha {
+public class Ficha { 
 
 	// Atributos
 	private String color;
