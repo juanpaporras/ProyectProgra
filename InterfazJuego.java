@@ -494,7 +494,7 @@ public class InterfazJuego extends JFrame {
 					boton.setBackground(null);
 					
 				} // Fin del bloque if
-			} // Fin del bloque if
+			} // Fin del bloque if  
 		} // Fin del bucle for
 	} // Fin del método reiniciarJuego
 

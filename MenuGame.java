@@ -109,8 +109,8 @@ public class MenuGame extends JFrame {
 		repaint();
 
 	} // Fin del constructor MenuGame
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	// Esta clase privada maneja y almacena la imagen en el componente.
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// Esta clase privada maneja y almacena la imagen en el componente.
 
 	private class ImagenComponent extends JComponent {
 		private Image imagen;
